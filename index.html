@@ -38,8 +38,12 @@
               <button type="submit" class="btn btn-primary mb-2" id="inline-registration-button">Register</button>
             </div>
           </form>
-        </div>      
+        </div>
         <p>Learn more at: <a href="https://bigspotteddog.github.io/tiles/blog">https://bigspotteddog.github.io/tiles/blog</a></p>
+        <hr />
+        <div class="article" data-src="setup.html"></div>
+        <hr />
+        <div class="article" data-src="setup-2.html"></div>
       </div>
       <div class="col-md-3" style="border-left: 1px solid #333; margin-top: 10px;">
         <div id="registration-container"></div>
@@ -90,10 +94,15 @@
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="js/google-registration.js"></script>
 
-  
   <script>
     window.addEventListener("load", (event) => {
-      const reg = RegistrationForm();
+      new Articles().load("article");
+    });
+  </script>
+
+  <script>
+    window.addEventListener("load", (event) => {
+      const reg = new RegistrationForm();
       reg.load("registration-container");
     });
   </script>
@@ -102,7 +111,7 @@
     window.addEventListener("load", (event) => {
       const button = document.getElementById("inline-registration-button");
 
-      const reg2 = RegistrationForm();
+      const reg2 = new RegistrationForm();
       reg2.settings.registrationNameId = "inline-registration-name";
       reg2.settings.registrationEmailId = "inline-registration-email";
       reg2.addRegistrationButtonEvents(button);

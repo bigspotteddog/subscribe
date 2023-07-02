@@ -1,4 +1,4 @@
-var Articles = Articles || (function () {
+var Articles = (function () {
   function load(elementClass) {
     const articles = document.getElementsByClassName(elementClass);
     for (let i = 0; i < articles.length; i++) {
@@ -24,4 +24,4 @@ var Articles = Articles || (function () {
   return {
     load: load
   }
-})();
+});

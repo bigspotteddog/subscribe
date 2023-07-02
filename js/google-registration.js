@@ -1,4 +1,4 @@
-var GoogleButton = GoogleButton || (function() {
+var GoogleButton = (function() {
   const settings = {
     googleButtonHtml: "../html/google-button.html",
     googleButtonId: "google_btn"
@@ -50,4 +50,4 @@ var GoogleButton = GoogleButton || (function() {
     settings: settings,
     load: load
   }
-})();
+});
