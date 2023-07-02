@@ -1,0 +1,48 @@
+<!-- This is the registration form -->
+<div>
+  <h3>Registration</h3>
+  <small id="registration-help" class="form-text text-muted">Register to receive blog post emails.</small>
+  <div id="registered-as" class="d-none">
+    Registered as: <a href="#" for="registered-as" title="sample@email.com">Registered Name</a>
+  </div>
+  <div id="registration" class="d-none registration">
+    <form id="registration-form">
+      <div class="form-group">
+        <label for="registration-name">Name</label>
+        <input type="text" class="form-control" id="registration-name" aria-describedby="nameHelp"
+          placeholder="Enter name" required>
+        <small id="nameHelp" class="form-text text-muted">Please enter your name.</small>
+      </div>
+      <div class="form-group">
+        <label for="registration-email">Email address</label>
+        <input type="email" class="form-control" id="registration-email" aria-describedby="emailHelp"
+          placeholder="Enter email" required>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <a href="#" id="registration-button" class="btn btn-primary w-100">Register</a>
+    </form>
+  </div>
+</div>
+
+<!-- This is the message modal -->
+<div class="modal fade" id="registration-modal" tabindex="-1" role="dialog" aria-labelledby="registration-modal-title"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registration-modal-title">Needs a title!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="registration-modal-message" class="modal-body">
+        Needs a message.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end message modal -->
+<!-- end regration form -->

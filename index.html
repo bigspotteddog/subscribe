@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Subscribe - Example</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Subscribe!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h1>Subscribe Example</h1>
+        <p>This is an example page for how to add registration elements to a web page.</p>
+        <div class="container">
+          <form>
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" id="registration-name" placeholder="Your name">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" id="registration-email" placeholder="Your email">
+              </div>
+              <button type="submit" class="btn btn-primary mb-2" id="registration-button">Register</button>
+            </div>
+          </form>
+        </div>      
+        <p>Learn more at: <a href="https://bigspotteddog.github.io/tiles/blog">https://bigspotteddog.github.io/tiles/blog</a></p>
+      </div>
+      <div class="col-md-3" style="border-left: 1px solid #333; margin-top: 10px;">
+        <div id="registration-container"></div>
+        <div id="google-button"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- This is the message modal -->
+  <div class="modal fade" id="registration-modal" tabindex="-1" role="dialog" aria-labelledby="registration-modal-title"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registration-modal-title">Needs a title!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="registration-modal-message" class="modal-body">
+          Needs a message.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end message modal -->
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- load articles -->
+  <script src="js/articles.js"></script>
+  <!-- add the registration form -->
+  <script src="js/registration.js"></script>
+  <!-- add the google button -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="js/google-registration.js"></script>
+
+  
+  <script>
+    window.addEventListener("load", (event) => {
+      RegistrationForm.load("registration-container");
+    });
+  </script>
+
+  <script>
+    window.addEventListener("load", (event) => {
+      const button = document.getElementById("registration-button");
+      RegistrationForm.addRegistrationButtonEvents(button);
+    });
+  </script>
+</body>
+
+</html>
