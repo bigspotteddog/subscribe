@@ -180,7 +180,7 @@ var RegistrationForm = (function() {
       return;
     }
 
-    fetch(this.settings.thisHtml)
+    fetch(settings.thisHtml)
     .then(function (response) {
       return response.text()
     })
