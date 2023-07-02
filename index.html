@@ -30,12 +30,12 @@
           <form>
             <div class="row">
               <div class="col">
-                <input type="text" class="form-control" id="registration-name" placeholder="Your name">
+                <input type="text" class="form-control" id="inline-registration-name" placeholder="Your name">
               </div>
               <div class="col">
-                <input type="text" class="form-control" id="registration-email" placeholder="Your email">
+                <input type="text" class="form-control" id="inline-registration-email" placeholder="Your email">
               </div>
-              <button type="submit" class="btn btn-primary mb-2" id="registration-button">Register</button>
+              <button type="submit" class="btn btn-primary mb-2" id="inline-registration-button">Register</button>
             </div>
           </form>
         </div>      
@@ -93,14 +93,20 @@
   
   <script>
     window.addEventListener("load", (event) => {
-      RegistrationForm.load("registration-container");
+      const reg = RegistrationForm();
+      reg.load("registration-container");
     });
   </script>
 
   <script>
     window.addEventListener("load", (event) => {
-      const button = document.getElementById("registration-button");
-      RegistrationForm.addRegistrationButtonEvents(button);
+      const button = document.getElementById("inline-registration-button");
+
+      const reg2 = RegistrationForm();
+      reg2.settings.registrationNameId = "inline-registration-name";
+      reg2.settings.registrationEmailId = "inline-registration-email";
+      reg2.addRegistrationButtonEvents(button);
+      reg2.checkRegistered();
     });
   </script>
 </body>

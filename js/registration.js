@@ -1,4 +1,4 @@
-var RegistrationForm = RegistrationForm || (function() {
+var RegistrationForm = (function() {
   const settings = {
     notifyMeUrl: "https://blog-service-391514.wm.r.appspot.com/notify-me",
     googleClientId: "154864473268-2nkn09qqmag5v5a173kh9pncsui6h1gv.apps.googleusercontent.com",
@@ -8,14 +8,14 @@ var RegistrationForm = RegistrationForm || (function() {
     registrationModalTitleId: "registration-modal-title",
     registrationModalMessageId: "registration-modal-message",
     registrationContainerClass: "registration",
-    registrationFormId: "registration-form",
+    thisId: "registration-form",
     registrationNameId: "registration-name",
     registrationEmailId: "registration-email",
     registrationButtonId: "registration-button",
     registeredAsContainerId: "registered-as",
     registeredAsQuerySelector: "registered-as a",
     localStorageRegisteredAsName: "registered-as",
-    registrationFormHtml: "../html/registration-form.html",
+    thisHtml: "../html/registration-form.html",
     manualForm: false
   }
 
@@ -52,7 +52,7 @@ var RegistrationForm = RegistrationForm || (function() {
         const result = await response.json();
         saveRegisteredAs(JSON.stringify(result));
         showMessage(settings.youHaveBeenRegisteredTitle, settings.youHaveBeenRegisteredMessage);
-        clearRegistrationForm();
+        clearthis();
         checkRegistered();
         return result;
       } else {
@@ -63,8 +63,8 @@ var RegistrationForm = RegistrationForm || (function() {
     }      
   }
 
-  function clearRegistrationForm() {
-    document.getElementById(settings.registrationFormId).reset();
+  function clearthis() {
+    document.getElementById(settings.thisId).reset();
   }
 
   function addRegistrationButtonEvents(element) {
@@ -112,12 +112,12 @@ var RegistrationForm = RegistrationForm || (function() {
   function addRegisteredAsEvents(element) {
     element.addEventListener("click", function (ev) {
       ev.preventDefault();
-      setRegistrationFormValues(getRegisteredAs());
+      setthisValues(getRegisteredAs());
       showRegistration();
     });  
   }
 
-  function setRegistrationFormValues(registeredAs) {
+  function setthisValues(registeredAs) {
     document.getElementById(settings.registrationNameId).value = registeredAs.name;
     document.getElementById(settings.registrationEmailId).value = registeredAs.email;
   }
@@ -138,8 +138,10 @@ var RegistrationForm = RegistrationForm || (function() {
 
   function setRegisteredAs(registeredAs) {
     const registeredAsLink = getRegisteredAsLink();
-    registeredAsLink.innerText = registeredAs.name;
-    registeredAsLink.setAttribute("title", registeredAs.email);
+    if (registeredAsLink) {
+      registeredAsLink.innerText = registeredAs.name;
+      registeredAsLink.setAttribute("title", registeredAs.email);
+    }
   }
 
   function showRegistration() {
@@ -151,10 +153,14 @@ var RegistrationForm = RegistrationForm || (function() {
   }
 
   function showRegisteredAs() {
-    document.getElementById(settings.registeredAsContainerId).classList.remove("d-none");  
-    const registrationElements = document.getElementsByClassName(settings.registrationContainerClass);
-    for (let i = 0; i < registrationElements.length; i++) {
-      registrationElements[i].classList.add("d-none");
+    const container = document.getElementById(settings.registeredAsContainerId)
+    
+    if (container) {
+      container.classList.remove("d-none");  
+      const registrationElements = document.getElementsByClassName(settings.registrationContainerClass);
+      for (let i = 0; i < registrationElements.length; i++) {
+        registrationElements[i].classList.add("d-none");
+      }
     }
   }
 
@@ -174,7 +180,7 @@ var RegistrationForm = RegistrationForm || (function() {
       return;
     }
 
-    fetch(RegistrationForm.settings.registrationFormHtml)
+    fetch(this.settings.thisHtml)
     .then(function (response) {
       return response.text()
     })
@@ -192,6 +198,7 @@ var RegistrationForm = RegistrationForm || (function() {
     load: load,
     saveRegisteredAs: saveRegisteredAs,
     postData: postData,
-    addRegistrationButtonEvents: addRegistrationButtonEvents
+    addRegistrationButtonEvents: addRegistrationButtonEvents,
+    checkRegistered: checkRegistered
   }
-})();
+});
