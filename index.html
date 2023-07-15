@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+  <style>
+    #registration-column {
+      border-left: 1px solid #333;
+      margin-top: 10px;
+    }
+  </style>
   <title>Subscribe - Example</title>
 </head>
 
@@ -26,7 +32,7 @@
       <div class="col-md-9">
         <h1>Subscribe Example</h1>
         <p>This is an example page for how to add registration elements to a web page.</p>
-        <div class="container">
+        <div class="container" id="inline-registration-container">
           <form>
             <div class="row">
               <div class="col">
@@ -40,12 +46,12 @@
           </form>
         </div>
         <p>Learn more at: <a href="https://bigspotteddog.github.io/tiles/blog">https://bigspotteddog.github.io/tiles/blog</a></p>
-        <hr />
+        <hr>
         <div class="article" data-src="setup.html"></div>
-        <hr />
+        <hr>
         <div class="article" data-src="setup-2.html"></div>
       </div>
-      <div class="col-md-3" style="border-left: 1px solid #333; margin-top: 10px;">
+      <div class="col-md-3" id="registration-column">
         <div id="registration-container"></div>
         <div id="google-button"></div>
       </div>
@@ -102,8 +108,7 @@
 
   <script>
     window.addEventListener("load", (event) => {
-      const reg = new RegistrationForm();
-      reg.load("registration-container");
+      new RegistrationForm().load();
     });
   </script>
 
@@ -111,11 +116,15 @@
     window.addEventListener("load", (event) => {
       const button = document.getElementById("inline-registration-button");
 
-      const reg2 = new RegistrationForm();
-      reg2.settings.registrationNameId = "inline-registration-name";
-      reg2.settings.registrationEmailId = "inline-registration-email";
-      reg2.addRegistrationButtonEvents(button);
-      reg2.checkRegistered();
+      const reg2 = new RegistrationForm()
+        .withTargetElement("inline-registration-container")
+        .withRegistrationNameId("inline-registration-name")
+        .withRegistrationEmailId("inline-registration-email")
+        .withRegistrationButtonId("inline-registration-button")
+        .withManualForm(true)
+        .addRegistrationButtonEvents(button)
+        .checkRegistered()
+        .load();
     });
   </script>
 </body>

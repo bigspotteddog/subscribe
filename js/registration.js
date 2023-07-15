@@ -1,22 +1,99 @@
-var RegistrationForm = (function() {
-  const settings = {
+var RegistrationForm = (function (incomingSettings) {
+  const defaultSettings = {
+    targetElement: "registration-container",
     notifyMeUrl: "https://blog-service-391514.wm.r.appspot.com/notify-me",
-    googleClientId: "154864473268-2nkn09qqmag5v5a173kh9pncsui6h1gv.apps.googleusercontent.com",
     youHaveBeenRegisteredTitle: "You have been registered!",
     youHaveBeenRegisteredMessage: "You have been registered for email notification when we post a new blog article.",
     registrationModalId: "registration-modal",
     registrationModalTitleId: "registration-modal-title",
     registrationModalMessageId: "registration-modal-message",
     registrationContainerClass: "registration",
-    thisId: "registration-form",
+    registrationFormId: "registration-form",
     registrationNameId: "registration-name",
     registrationEmailId: "registration-email",
     registrationButtonId: "registration-button",
     registeredAsContainerId: "registered-as",
     registeredAsQuerySelector: "registered-as a",
     localStorageRegisteredAsName: "registered-as",
-    thisHtml: "html/registration-form.html",
+    registrationFormPath: "../html/registration-form.html",
     manualForm: false
+  }
+
+  const settings = Object.assign({}, defaultSettings, incomingSettings);
+
+  function withTargetElement(targetElement) {
+    settings.targetElement = targetElement;
+    return exported;
+  }
+
+  function withNotifyMeUrl(notifyMeUrl) {
+    settings.notifyMeUrl = notifyMeUrl;
+    return exported;
+  }
+
+  function withYouHaveBeenRegisteredTitle(youHaveBeenRegisteredTitle) {
+    settings.youHaveBeenRegisteredTitle = ouHaveBeenRegisteredTitle;
+    return exported;
+  }
+
+  function withYouHaveBeenRegisteredMessage(youHaveBeenRegisteredMessage) {
+    settings.youHaveBeenRegisteredMessage = youHaveBeenRegisteredMessage;
+    return exported;
+  }
+
+  function withRegistrationModalId(registrationModalId) {
+    settings.registrationModalId = registrationModalId;
+    return exported;
+  }
+
+  function withregistrationModalTitleId(registrationModalTitleId) {
+    settings.registrationModalTitleId = registrationModalTitleId;
+    return exported;
+  }
+
+  function withRegistrationModalMessageId(registrationModalMessageId) {
+    settings.registrationModalMessageId = registrationModalMessageId;
+    return exported;
+  }
+
+  function withRegistrationContainerClass(registrationContainerClass) {
+    settings.registrationContainerClass = registrationContainerClass;
+    return exported;
+  }
+
+  function withRegistrationNameId(registrationNameId) {
+    settings.registrationNameId = registrationNameId;
+    return exported;
+  }
+
+  function withRegistrationEmailId(registrationEmailId) {
+    settings.registrationEmailId = registrationEmailId;
+    return exported;
+  }
+
+  function withRegistrationButtonId(registrationButtonId) {
+    settings.registrationButtonId = registrationButtonId;
+    return exported;
+  }
+
+  function withRegisteredAsContainerId(registeredAsContainerId) {
+    settings.registeredAsContainerId = registeredAsContainerId;
+    return exported;
+  }
+
+  function withRegisteredAsQuerySelector(registeredAsQuerySelector) {
+    settings.registeredAsQuerySelector = registeredAsQuerySelector;
+    return exported;
+  }
+
+  function withLocalStorageRegisteredAsName(localStorageRegisteredAsName) {
+    settings.localStorageRegisteredAsName = localStorageRegisteredAsName;
+    return exported;
+  }
+
+  function withManualForm(manualForm) {
+    settings.manualForm = manualForm;
+    return exported;
   }
 
   function showMessage(title, message, onClose) {
@@ -47,12 +124,12 @@ var RegistrationForm = (function() {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(data),
       });
-      
+
       if (response.status === 200) {
         const result = await response.json();
         saveRegisteredAs(JSON.stringify(result));
         showMessage(settings.youHaveBeenRegisteredTitle, settings.youHaveBeenRegisteredMessage);
-        clearthis();
+        clearForm();
         checkRegistered();
         return result;
       } else {
@@ -60,41 +137,46 @@ var RegistrationForm = (function() {
       }
     } catch (error) {
       console.error(error);
-    }      
+    }
   }
 
-  function clearthis() {
-    document.getElementById(settings.thisId).reset();
+  function clearForm() {
+    document.getElementById(settings.registrationFormId).reset();
   }
 
   function addRegistrationButtonEvents(element) {
+    if (!element) {
+      return exported;
+    }
+
     element.addEventListener("click", function (ev) {
       ev.preventDefault();
       const data = {
         name: document.getElementById(settings.registrationNameId).value,
         email: document.getElementById(settings.registrationEmailId).value
       }
-    
+
       if (data.name.trim().length === 0) {
         showMessage("Validation error!", "Name is required.", function () {
           document.getElementById(settings.registrationNameId).focus();
         });
         return;
       }
-    
+
       if (data.email.trim().length === 0) {
         showMessage("Validation error!", "Email is required.", function () {
           document.getElementById(settings.registrationEmailId).focus();
         });
         return;
       }
-    
+
       postData(settings.notifyMeUrl, data);
     });
+    return exported;
   }
 
   function saveRegisteredAs(registeredAs) {
-    localStorage.setItem(settings.localStorageRegisteredAsName, registeredAs);  
+    localStorage.setItem(settings.localStorageRegisteredAsName, registeredAs);
   }
 
   function readRegisteredAs() {
@@ -110,14 +192,17 @@ var RegistrationForm = (function() {
   }
 
   function addRegisteredAsEvents(element) {
+    if (!element) {
+      return;
+    }
     element.addEventListener("click", function (ev) {
       ev.preventDefault();
-      setthisValues(getRegisteredAs());
+      setRegisteredAsValues(getRegisteredAs());
       showRegistration();
-    });  
+    }, false);
   }
 
-  function setthisValues(registeredAs) {
+  function setRegisteredAsValues(registeredAs) {
     document.getElementById(settings.registrationNameId).value = registeredAs.name;
     document.getElementById(settings.registrationEmailId).value = registeredAs.email;
   }
@@ -130,10 +215,11 @@ var RegistrationForm = (function() {
     } else {
       showRegistration();
     }
+    return exported;
   }
 
   function getRegisteredAsLink() {
-    return document.querySelector("#" + settings.registeredAsQuerySelector);  
+    return document.querySelector("#" + settings.targetElement + " #" + settings.registeredAsQuerySelector);
   }
 
   function setRegisteredAs(registeredAs) {
@@ -154,9 +240,9 @@ var RegistrationForm = (function() {
 
   function showRegisteredAs() {
     const container = document.getElementById(settings.registeredAsContainerId)
-    
+
     if (container) {
-      container.classList.remove("d-none");  
+      container.classList.remove("d-none");
       const registrationElements = document.getElementsByClassName(settings.registrationContainerClass);
       for (let i = 0; i < registrationElements.length; i++) {
         registrationElements[i].classList.add("d-none");
@@ -174,31 +260,61 @@ var RegistrationForm = (function() {
     checkRegistered();
   }
 
-  function load(targetElement) {
+  function load() {
     if (settings.manualForm) {
       initialize();
-      return;
+      return exported;
     }
 
-    fetch(settings.thisHtml)
-    .then(function (response) {
-      return response.text()
-    })
-    .then(function (html) {
-      document.getElementById(targetElement).innerHTML = html;
-      initialize();
-    })
-    .catch(function (err) {
-      console.log('Failed to fetch page: ', err);
-    });
+    fetch(settings.registrationFormPath)
+      .then(function (response) {
+        return response.text()
+      })
+      .then(function (html) {
+        document.getElementById(settings.targetElement).innerHTML = html;
+        initialize();
+      })
+      .catch(function (err) {
+        console.log('Failed to fetch page: ', err);
+      });
+
+    return exported;
   }
 
-  return {
-    settings: settings,
+  function withGoogleButton(googleSettings) {
+    new GoogleButton()
+      .withGoogleClientId("594987790606-if4vj0i12lg3etfimqsc71j0hdj23r0v.apps.googleusercontent.com")
+      .withNotifyMeUrl(settings.notifyMeUrl)
+      .withSaveRegisteredAsFunction(saveRegisteredAs)
+      .withPostDataFunction(postData)
+      .load();
+    return exported;
+  }
+
+  const exported = {
+    notifyMeUrl: settings.notifyMeUrl,
     load: load,
     saveRegisteredAs: saveRegisteredAs,
     postData: postData,
     addRegistrationButtonEvents: addRegistrationButtonEvents,
-    checkRegistered: checkRegistered
-  }
+    checkRegistered: checkRegistered,
+    withGoogleButton: withGoogleButton,
+    withTargetElement: withTargetElement,
+    withNotifyMeUrl: withNotifyMeUrl,
+    withYouHaveBeenRegisteredTitle: withYouHaveBeenRegisteredTitle,
+    withYouHaveBeenRegisteredMessage: withYouHaveBeenRegisteredMessage,
+    withRegistrationModalId: withRegistrationModalId,
+    withregistrationModalTitleId: withregistrationModalTitleId,
+    withRegistrationModalMessageId: withRegistrationModalMessageId,
+    withRegistrationContainerClass: withRegistrationContainerClass,
+    withRegistrationNameId: withRegistrationNameId,
+    withRegistrationEmailId: withRegistrationEmailId,
+    withRegistrationButtonId: withRegistrationButtonId,
+    withRegisteredAsContainerId: withRegisteredAsContainerId,
+    withRegisteredAsQuerySelector: withRegisteredAsQuerySelector,
+    withLocalStorageRegisteredAsName: withLocalStorageRegisteredAsName,
+    withManualForm: withManualForm
+  };
+
+  return exported;
 });
