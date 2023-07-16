@@ -16,7 +16,7 @@ var RegistrationForms = (function (incomingSettings) {
       registeredAsContainerId: "registered-as",
       registeredAsQuerySelector: "registered-as a",
       localStorageRegisteredAsName: "registered-as",
-      registrationFormPath: "../html/registration-form.html",
+      registrationFormPath: "html/registration-form.html",
       manualForm: false
     }
 
