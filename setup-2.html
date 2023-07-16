@@ -18,15 +18,17 @@
           <p>To add side-panel registration, add the registration.js JavaScript file to your webpage:</p>
           <div style="font-family: monospace; padding: 10px;">
             <!-- add the registration form -->
-            &lt;script src="../js/registration.js"&gt;&lt;/script&gt;
+            &lt;script src="../js/registration-forms.js"&gt;&lt;/script&gt;
           </div>
           <p>You can clone the <a href="https://github.com/bigspotteddog/tiles">bigspotteddog/tiles</a> repository, or copy the <a href="https://github.com/bigspotteddog/tiles/blob/main/js/registration.js">registration.js</a> file to your own website.</p>
           <p>Once registration.js has been added to your webpage, you can give it the container div and it will add the registration form to it.</p>
           <div style="font-family: monospace; padding: 1px; padding-left: 10px;">
 <pre>&lt;script&gt;
-  window.onload = function () {
-    RegistrationForm.load("registration-container");
-  }
+  window.addEventListener("load", (event) => {
+    const forms = new RegistrationForms().Builder()
+      .withNewRegistrationForm("registration-container")
+      .create();
+  });
 &lt;/script&gt;</pre>
           </div>
           <p>The registration form will appear when the page loads in the container you gave it and it will look something like this:</p>
@@ -35,21 +37,19 @@
           </ol>
           <p>To add your own form, you can simply add the form elements,</p>
           <div style="font-family: monospace; padding: 1px; padding-left: 10px;">
-<pre>&lt;form id="registration-form"&gt;
-  &lt;input type="text" id="registration-name" placeholder="Enter name" required&gt;
-  &lt;input type="email" id="registration-email" placeholder="Enter email" required&gt;
-  &lt;a href="#" id="registration-button"&gt;Register&lt;/a&gt;
-&lt;/form&gt;</pre>
-          </div>
-          <p>then call RegistrationForm.addRegistrationButtonEvents with the button element.</p>
-<div style="font-family: monospace; padding: 1px; padding-left: 10px;">
 <pre>&lt;script&gt;
-  window.onload = function () {
-    const button = document.getElementById("registration-button");
-    RegistrationForm.addRegistrationButtonEvents(button);
-  }
+  window.addEventListener("load", (event) => {
+    const forms = new RegistrationForms().Builder()
+      .withNewRegistrationForm("registration-container")
+      .withNewRegistrationForm("inline-registration-container")
+        .withRegistrationNameId("inline-registration-name")
+        .withRegistrationEmailId("inline-registration-email")
+        .withRegistrationButtonId("inline-registration-button")
+        .withManualForm(true)
+      .create();
+  });
 &lt;/script&gt;</pre>
-</div>
+        </div>
         <p>There are other customizations that can be made as well. See registration.js for the actual code behind the RegistrationForm.</p>
 
         <p>An inline form can look something like this:</p>
