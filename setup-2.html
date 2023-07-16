@@ -36,11 +36,23 @@
           <ol>
           </ol>
           <p>To add your own form, you can simply add the form elements,</p>
+<pre>
+  &lt;div id="inline-registration-container"&gt;
+    &lt;form&gt;
+      &lt;input type="text" id="inline-registration-name" placeholder="Your name"&gt;
+      &lt;input type="text" id="inline-registration-email" placeholder="Your email"&gt;
+      &lt;button type="submit" id="inline-registration-button"&gt;Register&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+</pre>
+<p>An inline form can look something like this:</p>
+<img class="img-fluid" src="https://bigspotteddog.github.io/tiles/blog/img/registration-form-2.png" width="600px" alt="Inline registration form">
+
+          <p>Then register your form elements with the RegistrationForms object:</p>
           <div style="font-family: monospace; padding: 1px; padding-left: 10px;">
 <pre>&lt;script&gt;
-  window.addEventListener("load", (event) => {
+  window.addEventListener("load", (event) =&gt; {
     const forms = new RegistrationForms().Builder()
-      .withNewRegistrationForm("registration-container")
       .withNewRegistrationForm("inline-registration-container")
         .withRegistrationNameId("inline-registration-name")
         .withRegistrationEmailId("inline-registration-email")
@@ -49,11 +61,8 @@
       .create();
   });
 &lt;/script&gt;</pre>
-        </div>
-        <p>There are other customizations that can be made as well. See registration.js for the actual code behind the RegistrationForm.</p>
-
-        <p>An inline form can look something like this:</p>
-        <img class="img-fluid" src="https://bigspotteddog.github.io/tiles/blog/img/registration-form-2.png" width="600px">
+          </div>
+          <p>There are other customizations that can be made as well. See registration-forms.js for the actual code behind the RegistrationForm.</p>
         </td>
       </tr>
     </table>
