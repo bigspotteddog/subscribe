@@ -101,7 +101,7 @@
   <!-- load articles -->
   <script src="js/articles.js"></script>
   <!-- add the registration form -->
-  <script src="js/registration-server.js"></script>
+  <script src="js/registration-forms.js"></script>
   <!-- add the google button -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="js/google-registration.js"></script>
@@ -116,7 +116,7 @@
     window.addEventListener("load", (event) => {
       const button = document.getElementById("inline-registration-button");
 
-      const forms = new RegistrationForm().Builder()
+      const forms = new RegistrationForms().Builder()
         .withNewRegistrationForm("registration-container")
         .withNewRegistrationForm("inline-registration-container")
           .withRegistrationNameId("inline-registration-name")
