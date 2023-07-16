@@ -1,0 +1,16 @@
+Phone Number = Phone Number, Type(Home|Mobile)
+Person = First Name, Last Name, [Phone Number = Phone Number, Type(Home|Mobile)], [Address = Street Address, Street Address 2, City, ^State(AL|AK), Zip Code, Type()]
+Bob, Roberts, (801) 555-1212, Mobile, 123 Any Street,, Any Town, UT, 84909
+Tim, Timmons, (208) 555-1212, Home, 234 Another Street, Suite 123, That Town, IL, 23102
+
+Person
+---
+First_Name = { ID: Person.First_Name, Label: First Name, Type: String }
+Last_Name = { ID: Person.Last_Name, Label: Last Name, Type: String }
+Phone_Numbers[] = { ID: Person.Phone_Numbers, Label: Phone Numbers, Type: Phone_Number }
+Addresses[] = { ID: Person.Addresses, Label: Addresses, Type: Address }
+
+Phone_Number
+---
+Phone_Number = { ID: Person.Phone_Numbers[Phone_Number].Phone_Number, Label: Phone Number, Type: String }
+Type = { ID: Person.Phone_Number.Type, Label: Type, Type: String }

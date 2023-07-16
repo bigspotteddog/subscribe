@@ -21,7 +21,7 @@
       white-space: pre-wrap;
       word-wrap: break-word;
     }
-  </style>  
+  </style>
 </head>
 
 <body>
@@ -101,7 +101,7 @@
   <!-- load articles -->
   <script src="js/articles.js"></script>
   <!-- add the registration form -->
-  <script src="js/registration.js"></script>
+  <script src="js/registration-server.js"></script>
   <!-- add the google button -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="js/google-registration.js"></script>
@@ -114,23 +114,16 @@
 
   <script>
     window.addEventListener("load", (event) => {
-      new RegistrationForm().load();
-    });
-  </script>
-
-  <script>
-    window.addEventListener("load", (event) => {
       const button = document.getElementById("inline-registration-button");
 
-      const reg2 = new RegistrationForm()
-        .withTargetElement("inline-registration-container")
-        .withRegistrationNameId("inline-registration-name")
-        .withRegistrationEmailId("inline-registration-email")
-        .withRegistrationButtonId("inline-registration-button")
-        .withManualForm(true)
-        .addRegistrationButtonEvents(button)
-        .checkRegistered()
-        .load();
+      const forms = new RegistrationForm().Builder()
+        .withNewRegistrationForm("registration-container")
+        .withNewRegistrationForm("inline-registration-container")
+          .withRegistrationNameId("inline-registration-name")
+          .withRegistrationEmailId("inline-registration-email")
+          .withRegistrationButtonId("inline-registration-button")
+          .withManualForm(true)
+        .create();
     });
   </script>
 </body>

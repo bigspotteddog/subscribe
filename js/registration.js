@@ -170,6 +170,9 @@ var RegistrationForm = (function (incomingSettings) {
         return;
       }
 
+      const event = new CustomEvent("subscribe-register-as", { detail: data });
+      ev.currentTarget.dispatchEvent(event);
+
       postData(settings.notifyMeUrl, data);
     });
     return exported;
@@ -228,6 +231,7 @@ var RegistrationForm = (function (incomingSettings) {
       registeredAsLink.innerText = registeredAs.name;
       registeredAsLink.setAttribute("title", registeredAs.email);
     }
+    setRegisteredAsValues(registeredAs);
   }
 
   function showRegistration() {
@@ -256,6 +260,10 @@ var RegistrationForm = (function (incomingSettings) {
 
     const button = document.getElementById(settings.registrationButtonId);
     addRegistrationButtonEvents(button);
+
+    document.addEventListener('subscribe-register-as', function(ev) {
+      console.log(ev);
+    });
 
     checkRegistered();
   }
