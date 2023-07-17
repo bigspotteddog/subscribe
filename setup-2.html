@@ -47,11 +47,11 @@
         </ol>
         <p>To add your own form, you can simply add the form elements,</p>
         <pre>
-  &lt;div id="inline-registration-container"&gt;
+  &lt;div id="registration-container"&gt;
     &lt;form&gt;
-      &lt;input type="text" id="inline-registration-name" placeholder="Your name"&gt;
-      &lt;input type="text" id="inline-registration-email" placeholder="Your email"&gt;
-      &lt;button type="submit" id="inline-registration-button"&gt;Register&lt;/button&gt;
+      &lt;input type="text" id="registration-name" placeholder="Your name"&gt;
+      &lt;input type="text" id="registration-email" placeholder="Your email"&gt;
+      &lt;button type="submit" id="registration-button"&gt;Register&lt;/button&gt;
     &lt;/form&gt;
   &lt;/div&gt;
 </pre>
@@ -64,11 +64,8 @@
           <pre>&lt;script&gt;
   window.addEventListener("load", (event) =&gt; {
     const forms = new RegistrationForms().Builder()
-      .withNewRegistrationForm("inline-registration-container")
-        .withRegistrationNameId("inline-registration-name")
-        .withRegistrationEmailId("inline-registration-email")
-        .withRegistrationButtonId("inline-registration-button")
-        .withManualForm(true)
+      .withNewRegistrationForm()
+      .withManual(true)
       .create();
   });
 &lt;/script&gt;</pre>
