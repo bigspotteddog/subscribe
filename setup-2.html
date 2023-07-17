@@ -1,42 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Getting Started - Part 2</title>
-  </head>
-  <body>
-    <table style="max-width: 800px;">
-      <tr>
-        <td>
-          <h1>Getting Started - Part 2</h1>
-          <h2>Registration</h2>
 
-          <p>The following are the instructions for adding user registration to a webpage.</p>
-          <p>Please visit our <a href="https://bigspotteddog.github.io/tiles/blog/">blog</a> for the latest changes to blog posts.</p>
+<head>
+  <title>Getting Started - Part 2</title>
+</head>
 
-          <h3>Adding Registration</h3>
-          <p>To make it easier to add registration to a webpage, JavaScript libraries were created that can be added to your page that will do most of the heavy lifting.</p>
-          <p>To add side-panel registration, add the registration.js JavaScript file to your webpage:</p>
-          <div style="font-family: monospace; padding: 10px;">
-            <!-- add the registration form -->
-            &lt;script src="../js/registration-forms.js"&gt;&lt;/script&gt;
-          </div>
-          <p>You can clone the <a href="https://github.com/bigspotteddog/tiles">bigspotteddog/tiles</a> repository, or copy the <a href="https://github.com/bigspotteddog/tiles/blob/main/js/registration.js">registration.js</a> file to your own website.</p>
-          <p>Once registration.js has been added to your webpage, you can give it the container div and it will add the registration form to it.</p>
-          <div style="font-family: monospace; padding: 1px; padding-left: 10px;">
-<pre>&lt;script&gt;
+<body>
+  <table style="max-width: 800px;">
+    <tr>
+      <td>
+        <h1>Getting Started - Part 2</h1>
+        <h2>Registration</h2>
+
+        <p>The following are the instructions for adding user registration to a webpage.</p>
+        <p>Please visit our <a href="https://bigspotteddog.github.io/subscribe-example">blog</a> for the latest changes to
+          blog posts.</p>
+
+        <h3>Adding Registration</h3>
+        <p>To make it easier to add registration to a webpage, JavaScript libraries were created that can be added to
+          your page that will do most of the heavy lifting.</p>
+        <p>To add side-panel registration, add the registration-form.js JavaScript file to your webpage:</p>
+        <div style="font-family: monospace; padding: 10px;">
+          <!-- add the registration form -->
+          &lt;script src="../js/registration-forms.js"&gt;&lt;/script&gt;
+        </div>
+        html/registration-modal.html <p>You can clone the <a
+            href="https://github.com/bigspotteddog/subscribe-example">bigspotteddog/subscribe-example</a> repository, or copy the <a
+            href="https://github.com/bigspotteddog/subscribe-example/blob/main/js/registration-form.js">registration-form.js</a>
+          file to your own website.</p>
+        <p>Once registration-form.js has been added to your webpage, you can give it the container div and it will add
+          the registration form to it.</p>
+        <div style="font-family: monospace; padding: 1px; padding-left: 10px;">
+          <pre>&lt;script&gt;
   window.addEventListener("load", (event) => {
     const forms = new RegistrationForms().Builder()
       .withNewRegistrationForm("registration-container")
       .create();
   });
 &lt;/script&gt;</pre>
-          </div>
-          <p>The registration form will appear when the page loads in the container you gave it and it will look something like this:</p>
-          <img class="img-fluid" src="https://bigspotteddog.github.io/tiles/blog/img/registration-form-1.png" width="300px">
-          <ol>
-          </ol>
-          <p>To add your own form, you can simply add the form elements,</p>
-<pre>
+        </div>
+        <p>The registration form will appear when the page loads in the container you gave it and it will look something
+          like this:</p>
+        <img class="img-fluid" src="img/registration-form-1.png"
+          width="300px">
+        <ol>
+        </ol>
+        <p>To add your own form, you can simply add the form elements,</p>
+        <pre>
   &lt;div id="inline-registration-container"&gt;
     &lt;form&gt;
       &lt;input type="text" id="inline-registration-name" placeholder="Your name"&gt;
@@ -45,12 +55,13 @@
     &lt;/form&gt;
   &lt;/div&gt;
 </pre>
-<p>An inline form can look something like this:</p>
-<img class="img-fluid" src="https://bigspotteddog.github.io/tiles/blog/img/registration-form-2.png" width="600px" alt="Inline registration form">
+        <p>An inline form can look something like this:</p>
+        <img class="img-fluid" src="img/registration-form-2.png"
+          width="600px" alt="Inline registration form">
 
-          <p>Then register your form elements with the RegistrationForms object:</p>
-          <div style="font-family: monospace; padding: 1px; padding-left: 10px;">
-<pre>&lt;script&gt;
+        <p>Then register your form elements with the RegistrationForms object:</p>
+        <div style="font-family: monospace; padding: 1px; padding-left: 10px;">
+          <pre>&lt;script&gt;
   window.addEventListener("load", (event) =&gt; {
     const forms = new RegistrationForms().Builder()
       .withNewRegistrationForm("inline-registration-container")
@@ -61,10 +72,12 @@
       .create();
   });
 &lt;/script&gt;</pre>
-          </div>
-          <p>There are other customizations that can be made as well. See registration-forms.js for the actual code behind the RegistrationForm.</p>
-        </td>
-      </tr>
-    </table>
-  </body>
+        </div>
+        <p>There are other customizations that can be made as well. See registration-forms.js for the actual code behind
+          the RegistrationForm.</p>
+      </td>
+    </tr>
+  </table>
+</body>
+
 </html>
