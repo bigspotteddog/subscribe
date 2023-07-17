@@ -3,7 +3,7 @@ var GoogleButton = (function () {
     const defaultSettings = {
       googleClientId: "your google client id",
       targetElement: "google-button",
-      googleButtonHtmlPath: "../html/google-button.html",
+      googleButtonHtmlPath: "html/google-button.html",
       googleButtonId: "google_btn",
       saveRegisteredAsFunction: undefined, // function
       postDataFunction: undefined, // function
