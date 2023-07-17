@@ -121,6 +121,9 @@
           .withRegistrationEmailId("inline-registration-email")
           .withRegistrationButtonId("inline-registration-button")
           .withManualForm(true)
+        .withGoogleButton(new GoogleButton().Builder()
+          .withGoogleClientId("594987790606-if4vj0i12lg3etfimqsc71j0hdj23r0v.apps.googleusercontent.com")
+          .create())
         .create();
     });
   </script>
