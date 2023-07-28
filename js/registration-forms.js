@@ -1,7 +1,7 @@
 var RegistrationForms = (function () {
   const globalSettings = {
     targetElement: "registration-container",
-    notifyMeUrl: "https://code.nobodyelses.com/notify-me",
+    notifyMeUrl: "https://code.nobodyelses.com/nobodyelses/subscribe/notify-me",
     youHaveBeenRegisteredTitle: "You have been registered!",
     youHaveBeenRegisteredMessage: "You have been registered for email notification when we post a new blog article.",
     registrationModalId: "registration-modal",
