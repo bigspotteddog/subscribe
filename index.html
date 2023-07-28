@@ -40,20 +40,21 @@
         <p>To add your own Subscribe! form to your website, simply paste this html anywhere on your page and style as needed:</p>
 
         <pre>
-          &lt;div id="registration-container"&gt;
-            &lt;form&gt;
-              &lt;input type="text" id="registration-name" placeholder="Your name"&gt;
-              &lt;input type="text" id="registration-email" placeholder="Your email"&gt;
-              &lt;button type="submit" id="registration-button"&gt;Register&lt;/button&gt;
-            &lt;/form&gt;
-          &lt;/div&gt;</pre>
-        <pre>&lt;script&gt;
-          window.addEventListener("load", (event) => {
-            const forms = new RegistrationForms().Builder()
-              .withNewRegistrationForm("registration-container")
-              .create();
-          });
-        &lt;/script&gt;</pre>
+&lt;div id="registration-container"&gt;
+  &lt;form&gt;
+    &lt;input type="text" id="registration-name" placeholder="Your name"&gt;
+    &lt;input type="text" id="registration-email" placeholder="Your email"&gt;
+    &lt;button type="submit" id="registration-button"&gt;Register&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</pre>
+        <pre>
+&lt;script&gt;
+  window.addEventListener("load", (event) => {
+    const forms = new RegistrationForms().Builder()
+      .withNewRegistrationForm("registration-container")
+      .create();
+  });
+&lt;/script&gt;</pre>
 
         <p>Here is a working example:</p>
         <div class="container" id="registration-container">
