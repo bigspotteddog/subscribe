@@ -112,7 +112,9 @@
     window.addEventListener("load", (event) => {
       const forms = new RegistrationForms().Builder()
         .withNewRegistrationForm("registration-container")
+          .withNotifyMeUrl("https://b5ab-2601-681-897e-e60-305e-c2e7-b614-4280.ngrok-free.app/nobodyelses/subscribe/notify-me")
         .withNewRegistrationForm("inline-registration-container")
+          .withNotifyMeUrl("https://b5ab-2601-681-897e-e60-305e-c2e7-b614-4280.ngrok-free.app/nobodyelses/subscribe/notify-me")
           .withRegistrationNameId("inline-registration-name")
           .withRegistrationEmailId("inline-registration-email")
           .withRegistrationButtonId("inline-registration-button")
