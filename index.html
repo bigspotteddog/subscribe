@@ -15,7 +15,7 @@
       margin-top: 10px;
     }
   </style>
-  <title>Subscribe - Example</title>
+  <title>Subscribe!</title>
   <style>
     pre {
       white-space: pre-wrap;
@@ -37,50 +37,42 @@
     <div class="row">
       <div class="col-md-9">
         <h1>Subscribe!</h1>
-        <p>This is an example page for how to add registration elements to a web page.</p>
-        <div class="container" id="inline-registration-container">
+        <p>To add your own Subscribe! form to your website, simply paste this html anywhere on your page and style as needed:</p>
+
+        <pre>
+          &lt;div id="registration-container"&gt;
+            &lt;form&gt;
+              &lt;input type="text" id="registration-name" placeholder="Your name"&gt;
+              &lt;input type="text" id="registration-email" placeholder="Your email"&gt;
+              &lt;button type="submit" id="registration-button"&gt;Register&lt;/button&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;</pre>
+        <pre>&lt;script&gt;
+          window.addEventListener("load", (event) => {
+            const forms = new RegistrationForms().Builder()
+              .withNewRegistrationForm("registration-container")
+              .create();
+          });
+        &lt;/script&gt;</pre>
+
+        <p>Here is a working example:</p>
+        <div class="container" id="registration-container">
           <form>
             <div class="row">
               <div class="col">
-                <input type="text" class="form-control" id="inline-registration-name" placeholder="Your name">
+                <input type="text" class="form-control" id="registration-name" placeholder="Your name">
               </div>
               <div class="col">
-                <input type="text" class="form-control" id="inline-registration-email" placeholder="Your email">
+                <input type="text" class="form-control" id="registration-email" placeholder="Your email">
               </div>
-              <button type="submit" class="btn btn-primary mb-2" id="inline-registration-button">Register</button>
+              <button type="submit" class="btn btn-primary mb-2" id="registration-button">Register</button>
             </div>
           </form>
         </div>
         <p>Learn more at: <a href="https://subscribe.nobodyelses.com">https://subscribe.nobodyelses.com</a></p>
       </div>
-      <div class="col-md-3" id="registration-column">
-        <div id="registration-container"></div>
-        <div id="google-button"></div>
-      </div>
     </div>
   </div>
-
-  <!-- This is the message modal -->
-  <div class="modal fade" id="registration-modal" tabindex="-1" role="dialog" aria-labelledby="registration-modal-title"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="registration-modal-title">Needs a title!</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div id="registration-modal-message" class="modal-body">
-          Needs a message.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end message modal -->
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -98,9 +90,6 @@
   <script src="js/articles.js"></script>
   <!-- add the registration form -->
   <script src="js/registration-forms.js"></script>
-  <!-- add the google button -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="js/google-registration.js"></script>
 
   <script>
     window.addEventListener("load", (event) => {
@@ -110,19 +99,7 @@
 
   <script>
     window.addEventListener("load", (event) => {
-      const forms = new RegistrationForms().Builder()
-        .withNewRegistrationForm("registration-container")
-          .withNotifyMeUrl("https://b5ab-2601-681-897e-e60-305e-c2e7-b614-4280.ngrok-free.app/nobodyelses/subscribe/notify-me")
-        .withNewRegistrationForm("inline-registration-container")
-          .withNotifyMeUrl("https://b5ab-2601-681-897e-e60-305e-c2e7-b614-4280.ngrok-free.app/nobodyelses/subscribe/notify-me")
-          .withRegistrationNameId("inline-registration-name")
-          .withRegistrationEmailId("inline-registration-email")
-          .withRegistrationButtonId("inline-registration-button")
-          .withManualForm(true)
-        .withGoogleButton(new GoogleButton().Builder()
-          .withGoogleClientId("594987790606-if4vj0i12lg3etfimqsc71j0hdj23r0v.apps.googleusercontent.com")
-          .create())
-        .create();
+      const forms = new RegistrationForms().Builder().withNewRegistrationForm().withManualForm(true).create();
     });
   </script>
 </body>
