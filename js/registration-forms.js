@@ -317,6 +317,10 @@ var RegistrationForms = (function () {
       }
 
       function showRegistration() {
+        if (settings.manualForm) {
+          return;
+        }
+
         const registrationElements = document.getElementsByClassName(settings.registrationContainerClass);
         for (let i = 0; i < registrationElements.length; i++) {
           registrationElements[i].classList.remove("d-none");
@@ -328,6 +332,9 @@ var RegistrationForms = (function () {
       }
 
       function showRegisteredAs() {
+        if (settings.manualForm) {
+          return;
+        }
         const container = document.getElementById(settings.registeredAsContainerId)
 
         if (container) {
