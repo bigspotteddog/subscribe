@@ -12,6 +12,9 @@ var RegistrationForms = (function () {
   }
 
   function loadRegistrationModal() {
+    if (settings.manualForm) {
+      return;
+    }
     fetch(globalSettings.registrationModalPath)
       .then(function (response) {
         return response.text()
@@ -42,7 +45,9 @@ var RegistrationForms = (function () {
       if (response.status === 200) {
         const result = await response.json();
         saveRegisteredAs(JSON.stringify(result));
-        showMessage(globalSettings.youHaveBeenRegisteredTitle, globalSettings.youHaveBeenRegisteredMessage);
+        if (!settings.manualForm) {
+          showMessage(globalSettings.youHaveBeenRegisteredTitle, globalSettings.youHaveBeenRegisteredMessage);
+        }
 
         const event = new CustomEvent("subscribe-register-as", { detail: data });
         document.dispatchEvent(event);
@@ -64,9 +69,14 @@ var RegistrationForms = (function () {
   }
 
   function showMessage(title, message, onClose) {
+    const modal = $('#' + globalSettings.registrationModalId);
+
+    if (!modal) {
+      return;
+    }
+
     document.getElementById(globalSettings.registrationModalTitleId).innerText = title;
     document.getElementById(globalSettings.registrationModalMessageId).innerText = message;
-    const modal = $('#' + globalSettings.registrationModalId);
     modal.modal('show');
 
     if (onClose) {
@@ -348,7 +358,9 @@ var RegistrationForms = (function () {
 
       function initialize() {
         const registeredAsLink = getRegisteredAsLink();
-        addRegisteredAsEvents(registeredAsLink);
+        if (registeredAsLink) {
+          addRegisteredAsEvents(registeredAsLink);
+        }
 
         const button = document.getElementById(settings.registrationButtonId);
         addRegistrationButtonEvents(button);
