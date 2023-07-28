@@ -12,9 +12,6 @@ var RegistrationForms = (function () {
   }
 
   function loadRegistrationModal() {
-    if (settings.manualForm) {
-      return;
-    }
     fetch(globalSettings.registrationModalPath)
       .then(function (response) {
         return response.text()
@@ -210,7 +207,9 @@ var RegistrationForms = (function () {
     }
 
     function create() {
-      loadRegistrationModal();
+      if (!settings.manualForm) {
+        loadRegistrationModal();
+      }
 
       const keys = Object.keys(formSettings);
       for (let i = 0; i < keys.length; i++) {
