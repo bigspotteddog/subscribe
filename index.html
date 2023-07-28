@@ -100,7 +100,7 @@
 
   <script>
     window.addEventListener("load", (event) => {
-      const forms = new RegistrationForms().Builder().withNewRegistrationForm().withManualForm(true).create();
+      const forms = new RegistrationForms("registration-container").Builder().withNewRegistrationForm().withManualForm(true).create();
     });
   </script>
 </body>
