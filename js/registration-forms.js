@@ -66,12 +66,21 @@ var RegistrationForms = (function () {
   function showMessage(title, message, onClose) {
     const modal = $('#' + globalSettings.registrationModalId);
 
-    if (!modal) {
+    if (modal.length === 0) {
       return;
     }
 
-    document.getElementById(globalSettings.registrationModalTitleId).innerText = title;
-    document.getElementById(globalSettings.registrationModalMessageId).innerText = message;
+    const titleElement = document.getElementById(globalSettings.registrationModalTitleId);
+    const messageElement = document.getElementById(globalSettings.registrationModalMessageId);
+
+    if (titleElement) {
+      titleElement.innerText = title;
+    }
+
+    if (messageElement) {
+      messageElement.innerText = message;
+    }
+    
     modal.modal('show');
 
     if (onClose) {
