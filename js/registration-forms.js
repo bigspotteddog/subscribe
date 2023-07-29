@@ -42,9 +42,7 @@ var RegistrationForms = (function () {
       if (response.status === 200) {
         const result = await response.json();
         saveRegisteredAs(JSON.stringify(result));
-        if (!settings.manualForm) {
-          showMessage(globalSettings.youHaveBeenRegisteredTitle, globalSettings.youHaveBeenRegisteredMessage);
-        }
+        showMessage(globalSettings.youHaveBeenRegisteredTitle, globalSettings.youHaveBeenRegisteredMessage);
 
         const event = new CustomEvent("subscribe-register-as", { detail: data });
         document.dispatchEvent(event);
