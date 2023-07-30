@@ -52,6 +52,7 @@
 &lt;script&gt;
   window.addEventListener("load", (event) => {
     const forms = new RegistrationForms().Builder()
+      .withAccountNumber("your-account-number")
       .withNewRegistrationForm("registration-container")
       .create();
   });

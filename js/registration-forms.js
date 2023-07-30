@@ -239,6 +239,7 @@ var RegistrationForms = (function () {
     }
 
     const exported = {
+      withAccountNumber: withAccountNumber,
       withRegistrationModalTargetElement: withRegistrationModalTargetElement,
       withNotifyMeUrl: withNotifyMeUrl,
       withYouHaveBeenRegisteredTitle: withYouHaveBeenRegisteredTitle,
