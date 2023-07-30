@@ -37,7 +37,8 @@
     <div class="row">
       <div class="col-md-9">
         <h1>Subscribe!</h1>
-        <p>To add your own Subscribe! form to your website, simply paste this html anywhere on your page and style as needed:</p>
+        <p>To add your own Subscribe! form to your website, simply paste this html anywhere on your page and style as
+          needed:</p>
 
         <pre>
 &lt;div id="registration-container"&gt;
@@ -100,7 +101,11 @@
 
   <script>
     window.addEventListener("load", (event) => {
-      const forms = new RegistrationForms("registration-container").Builder().withNewRegistrationForm().withManualForm(true).create();
+      const forms = new RegistrationForms("registration-container").Builder()
+        .withAccountNumber("10054321")
+        .withNewRegistrationForm()
+        .withManualForm(true)
+        .create();
     });
   </script>
 </body>

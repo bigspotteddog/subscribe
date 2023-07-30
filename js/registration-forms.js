@@ -1,7 +1,7 @@
 var RegistrationForms = (function () {
   const globalSettings = {
     targetElement: "registration-container",
-    notifyMeUrl: "https://code.nobodyelses.com/nobodyelses/subscribe/accounts/10054321/notify-me",
+    notifyMeUrl: "https://code.nobodyelses.com/nobodyelses/subscribe/accounts/{accountNumber}/notify-me",
     youHaveBeenRegisteredTitle: "You have been registered!",
     youHaveBeenRegisteredMessage: "You have been registered for email notification when we post a new blog article.",
     registrationModalId: "registration-modal",
@@ -26,7 +26,7 @@ var RegistrationForms = (function () {
 
   async function postData(data = {}) {
     try {
-      const response = await fetch(globalSettings.notifyMeUrl, {
+      const response = await fetch(globalSettings.notifyMeUrl.replace("{accountNumber}", globalSettings.accountNumber), {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -117,6 +117,11 @@ var RegistrationForms = (function () {
     const forms = {};
     const googleButtons = {};
     let settings;
+
+    function withAccountNumber(accountNumber) {
+      globalSettings.accountNumber = accountNumber;
+      return exported;
+    }
 
     function withRegistrationModalTargetElement(targetElement) {
       globalSettings.targetElement = targetElement;
