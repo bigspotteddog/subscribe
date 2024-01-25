@@ -115,6 +115,7 @@
       // response is promise with passed token
           grecaptcha.execute("6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg", {action:"validate_captcha"}).then(function(token) {
               // add token value to form
+              console.log("add token to form");
               document.getElementById('g-recaptcha-response').value = token;
           });
       });
