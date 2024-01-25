@@ -85,8 +85,6 @@
             </div>
             <input type="hidden" id="id" name="id">
             <input type="hidden" id="unique" name="unique" value="email">
-            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-            <input type="hidden" name="action" value="validate_captcha">
           </form>
         </div>
         <p>Learn more at: <a href="https://subscribe.nobodyelses.com">https://subscribe.nobodyelses.com</a></p>
@@ -101,15 +99,15 @@
 
   <script>
     window.addEventListener("load", (event) => {
-      // const forms = new RegistrationForms().Builder()
-      //   .withAccountNumber("learntodecode")
-      //   .withNewRegistrationForm("registration-container")
-      //   .withManualForm(true)
-      //   .create();
+      const forms = new RegistrationForms().Builder()
+        .withAccountNumber("learntodecode")
+        .withNewRegistrationForm("registration-container")
+        .withManualForm(true)
+        .create();
     });
   </script>
 
-  <script>
+  <!-- <script>
       grecaptcha.ready(function() {
       // do request for recaptcha token
       // response is promise with passed token
@@ -121,7 +119,7 @@
               document.getElementById("g-recaptcha-response").value = token;
           });
       });
-  </script>
+  </script> -->
 
   <script>
     function onSubmit(token) {
