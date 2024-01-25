@@ -17,6 +17,7 @@
       word-wrap: break-word;
     }
   </style>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg"></script>
 </head>
 
 <body>
@@ -72,7 +73,7 @@
 
         <p>Here is a working example:</p>
         <div class="container g-0 mb-3" id="registration-container">
-          <form id="registration-form" class="row g-3">
+          <form id="registration-form" class="row g-3" >
             <div class="col-auto">
               <input type="text" class="form-control" id="registration-name" name="name" placeholder="Your name">
             </div>
@@ -108,7 +109,6 @@
     });
   </script>
 
-  <script src="https://www.google.com/recaptcha/api.js?render=6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg"></script>
   <script>
       grecaptcha.ready(function() {
       // do request for recaptcha token
