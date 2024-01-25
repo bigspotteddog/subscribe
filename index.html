@@ -100,11 +100,11 @@
 
   <script>
     window.addEventListener("load", (event) => {
-      const forms = new RegistrationForms().Builder()
-        .withAccountNumber("learntodecode")
-        .withNewRegistrationForm("registration-container")
-        .withManualForm(true)
-        .create();
+      // const forms = new RegistrationForms().Builder()
+      //   .withAccountNumber("learntodecode")
+      //   .withNewRegistrationForm("registration-container")
+      //   .withManualForm(true)
+      //   .create();
     });
   </script>
 
@@ -116,7 +116,9 @@
           grecaptcha.execute("6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg", {action:"validate_captcha"}).then(function(token) {
               // add token value to form
               console.log("add token to form");
-              document.getElementById('g-recaptcha-response').value = token;
+              console.log(token);
+              console.log(document.getElementById("g-recaptcha-response"));
+              document.getElementById("g-recaptcha-response").value = token;
           });
       });
   </script>
