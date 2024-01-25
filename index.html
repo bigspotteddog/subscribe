@@ -138,7 +138,7 @@
         await auth0Client.loginWithRedirect({
           authorizationParams: {
             // I am using ngrok locally so auth0 can use this callback.
-            redirect_uri: "https://262a-174-68-151-201.ngrok-free.app",
+            redirect_uri: "https://subscribe.nobodyelses.com",
           },
         });
       }
@@ -155,7 +155,7 @@
       clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
       authorizationParams: {
         // The audience is set so this api claim will be in the token.
-        audience: "https://262a-174-68-151-201.ngrok-free.app",
+        audience: "https://subscribe.nobodyelses.com",
       },
     });
 
@@ -168,7 +168,7 @@
     logoutButton.addEventListener("click", async (e) => {
       auth0Client.logout({
         // Come back here after logout.
-        returnTo: "https://262a-174-68-151-201.ngrok-free.app",
+        returnTo: "https://subscribe.nobodyelses.com",
         clientID: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
       });
     });
@@ -181,7 +181,7 @@
           // Call some api with the token
           const result = await fetch(
             // Get a record from the server where the token is validated.
-            "https://262a-174-68-151-201.ngrok-free.app/records?who=bob_roberts",
+            "https://subscribe.nobodyelses.com/records?who=bob_roberts",
             {
               method: "GET",
               headers: {
