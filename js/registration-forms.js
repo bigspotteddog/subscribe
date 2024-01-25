@@ -1,7 +1,7 @@
 var RegistrationForms = (function () {
   const globalSettings = {
     targetElement: "registration-container",
-    notifyMeUrl: "https://code.nobodyelses.com/nobodyelses/subscribe/accounts/{accountNumber}/notify-me",
+    notifyMeUrl: "https://api.everybodyelses.com/v1/subscribe/{accountNumber}/emails",
     youHaveBeenRegisteredTitle: "You have been registered!",
     youHaveBeenRegisteredMessage: "You have been registered for email notification when we post a new blog article.",
     registrationModalId: "registration-modal",
@@ -64,9 +64,10 @@ var RegistrationForms = (function () {
   }
 
   function showMessage(title, message, onClose) {
-    const modal = $('#' + globalSettings.registrationModalId);
+    const modal = document.getElementById(globalSettings.registrationModalId);
 
-    if (modal.length === 0) {
+    if (modal === null || modal.length === 0) {
+      alert(message);
       return;
     }
 
@@ -80,7 +81,7 @@ var RegistrationForms = (function () {
     if (messageElement) {
       messageElement.innerText = message;
     }
-    
+
     modal.modal('show');
 
     if (onClose) {
@@ -293,7 +294,7 @@ var RegistrationForms = (function () {
             return;
           }
 
-          postData(data);
+          postData(Object.fromEntries(new FormData(document.getElementById("registration-form")).entries()));
         });
         return exported;
       }

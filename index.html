@@ -3,20 +3,15 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subscribe!</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
   <style>
     #registration-column {
       border-left: 1px solid #333;
       margin-top: 10px;
     }
-  </style>
-  <title>Subscribe!</title>
-  <style>
     pre {
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -25,30 +20,29 @@
 </head>
 
 <body>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
       <a class="navbar-brand" href="#">Subscribe!</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-        </ul>
-        <span class="navbar-text">
-          <a class="nav-link" href="#">Sign In</a>
-        </span>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">Pricing</a>
+        </div>
       </div>
-    </nav>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Hello, world!</h1>
+    <button type="button" class="btn btn-primary" id="login">Login</button>
+    <button type="button" class="btn btn-danger" id="logout">Logout</button>
+    <button type="button" class="btn btn-secondary" id="callApi">
+      Call API
+    </button>
   </div>
 
   <div class="container">
@@ -77,21 +71,21 @@
 &lt;/script&gt;</pre>
 
         <p>Here is a working example:</p>
-        <div class="container" id="registration-container">
-          <form id="registration-form">
-            <div class="row">
-              <div class="col">
-                <input type="text" class="form-control" id="registration-name" placeholder="Your name">
-              </div>
-              <div class="col">
-                <input type="text" class="form-control" id="registration-email" placeholder="Your email">
-              </div>
-
-              <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-              <input type="hidden" name="action" value="validate_captcha">
-
-              <button type="button" class="btn btn-primary g-recaptcha" data-sitekey="reCAPTCHA_site_key" data-callback="onSubmit" data-action="submit">Register</button>
+        <div class="container g-0 mb-3" id="registration-container">
+          <form id="registration-form" class="row g-3">
+            <div class="col-auto">
+              <input type="text" class="form-control" id="registration-name" name="name" placeholder="Your name">
             </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" id="registration-email" name="email" placeholder="Your email">
+            </div>
+            <div class="col-auto">
+              <button type="submit" id="registration-button" class="btn btn-primary g-recaptcha" data-sitekey="6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg" data-callback="onSubmit" data-action="submit">Register</button>
+            </div>
+            <input type="hidden" id="id" name="id">
+            <input type="hidden" id="unique" name="unique" value="email">
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+            <input type="hidden" name="action" value="validate_captcha">
           </form>
         </div>
         <p>Learn more at: <a href="https://subscribe.nobodyelses.com">https://subscribe.nobodyelses.com</a></p>
@@ -99,48 +93,122 @@
     </div>
   </div>
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
   <!-- add the registration form -->
   <script src="js/registration-forms.js"></script>
 
   <script>
     window.addEventListener("load", (event) => {
-      const forms = new RegistrationForms("registration-container").Builder()
-        .withAccountNumber("10054321")
-        .withNewRegistrationForm()
+      const forms = new RegistrationForms().Builder()
+        .withAccountNumber("learntodecode")
+        .withNewRegistrationForm("registration-container")
         .withManualForm(true)
         .create();
     });
   </script>
 
-<script src="https://www.google.com/recaptcha/api.js?render=6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg"></script>
-<script>
-    grecaptcha.ready(function() {
-    // do request for recaptcha token
-    // response is promise with passed token
-        grecaptcha.execute("6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg", {action:"validate_captcha"}).then(function(token) {
-            // add token value to form
-            document.getElementById('g-recaptcha-response').value = token;
-        });
-    });
-</script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg"></script>
+  <script>
+      grecaptcha.ready(function() {
+      // do request for recaptcha token
+      // response is promise with passed token
+          grecaptcha.execute("6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg", {action:"validate_captcha"}).then(function(token) {
+              // add token value to form
+              document.getElementById('g-recaptcha-response').value = token;
+          });
+      });
+  </script>
 
   <script>
     function onSubmit(token) {
+      document.getElementById("id").value = document.getElementById("registration-email").value;
       document.getElementById("registration-form").submit();
     }
   </script>
-</body>
 
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <script type="module">
+    const checkLogin = async () => {
+      try {
+        const token = await auth0Client.getTokenSilently();
+        await profile();
+        return token;
+      } catch (err) {
+        await auth0Client.loginWithRedirect({
+          authorizationParams: {
+            // I am using ngrok locally so auth0 can use this callback.
+            redirect_uri: "https://262a-174-68-151-201.ngrok-free.app",
+          },
+        });
+      }
+    };
+
+    const profile = async () => {
+      const isAuthenticated = await auth0Client.isAuthenticated();
+      const userProfile = await auth0Client.getUser();
+      console.log(userProfile);
+    };
+
+    const auth0Client = await auth0.createAuth0Client({
+      domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
+      clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
+      authorizationParams: {
+        // The audience is set so this api claim will be in the token.
+        audience: "https://262a-174-68-151-201.ngrok-free.app",
+      },
+    });
+
+    const loginButton = document.getElementById("login");
+    loginButton.addEventListener("click", async (e) => {
+      await checkLogin();
+    });
+
+    const logoutButton = document.getElementById("logout");
+    logoutButton.addEventListener("click", async (e) => {
+      auth0Client.logout({
+        // Come back here after logout.
+        returnTo: "https://262a-174-68-151-201.ngrok-free.app",
+        clientID: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
+      });
+    });
+
+    document.getElementById("callApi").addEventListener("click", async () => {
+      try {
+        const token = await checkLogin();
+        if (token) {
+          console.log("Bearer " + token);
+          // Call some api with the token
+          const result = await fetch(
+            // Get a record from the server where the token is validated.
+            "https://262a-174-68-151-201.ngrok-free.app/records?who=bob_roberts",
+            {
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          );
+          const data = await result.json();
+          console.log(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    if (
+      location.search.includes("state=") &&
+      (location.search.includes("code=") ||
+        location.search.includes("error="))
+    ) {
+      await auth0Client.handleRedirectCallback();
+      window.history.replaceState({}, document.title, "/");
+      await profile();
+    } else {
+      // Auto login
+      await checkLogin();
+    }
+  </script>
+</body>
 </html>
