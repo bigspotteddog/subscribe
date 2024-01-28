@@ -73,15 +73,15 @@
 
         <p>Here is a working example:</p>
         <div class="container g-0 mb-3" id="registration-container">
-          <form id="registration-form" class="row g-3" >
+          <form id="registration-form" class="row g-3">
             <div class="col-auto">
-              <input type="text" class="form-control" id="registration-name" name="name" placeholder="Your name">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Your name">
             </div>
             <div class="col-auto">
-              <input type="text" class="form-control" id="registration-email" name="email" placeholder="Your email">
+              <input type="text" class="form-control" id="email" name="email" placeholder="Your email">
             </div>
             <div class="col-auto">
-              <button type="submit" id="registration-button" class="btn btn-primary g-recaptcha" data-sitekey="6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg" data-callback="onSubmit" data-action="submit">Register</button>
+              <button type="button" class="btn btn-primary g-recaptcha" data-sitekey="6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg" data-callback="onSubmit" data-action="submit">Register</button>
             </div>
             <input type="hidden" id="id" name="id">
             <input type="hidden" id="unique" name="unique" value="email">
@@ -94,71 +94,45 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-  <!-- add the registration form -->
-  <script src="js/registration-forms.js"></script>
-
   <script>
-    window.addEventListener("load", (event) => {
-      const forms = new RegistrationForms().Builder()
-        .withAccountNumber("learntodecode")
-        .withNewRegistrationForm("registration-container")
-        .withManualForm(true)
-        .create();
-    });
-  </script>
+    async function onSubmit(token) {
+      document.getElementById("id").value = document.getElementById("email").value
+      const data = Object.fromEntries(new FormData(document.getElementById("registration-form")).entries());
 
-<script>
-  // How this code snippet works:
-  // This logic overwrites the default behavior of `grecaptcha.ready()` to
-  // ensure that it can be safely called at any time. When `grecaptcha.ready()`
-  // is called before reCAPTCHA is loaded, the callback function that is passed
-  // by `grecaptcha.ready()` is enqueued for execution after reCAPTCHA is
-  // loaded.
-  if(typeof grecaptcha === 'undefined') {
-    debugger
-    grecaptcha = {};
-  }
-  grecaptcha.ready = function(cb){
-    if(typeof grecaptcha === 'undefined') {
-      // window.__grecaptcha_cfg is a global variable that stores reCAPTCHA's
-      // configuration. By default, any functions listed in its 'fns' property
-      // are automatically executed when reCAPTCHA loads.
-      const c = '___grecaptcha_cfg';
-      window[c] = window[c] || {};
-      (window[c]['fns'] = window[c]['fns']||[]).push(cb);
-    } else {
-      cb();
-    }
-  }
-
-  // Usage
-  grecaptcha.ready(function(){
-    grecaptcha.render("container", {
-      sitekey: "6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg"
-    });
-  });
-</script>
-
-  <script>
-      grecaptcha.ready(function() {
-      // do request for recaptcha token
-      // response is promise with passed token
-          grecaptcha.execute("6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg", {action:"validate_captcha"}).then(function(token) {
-              // add token value to form
-              console.log("add token to form");
-              console.log(token);
-              console.log(document.getElementById("g-recaptcha-response"));
-              document.getElementById("g-recaptcha-response").value = token;
-          });
+      const response = await fetch("https://api.everybodyelses.com/v1/subscribe/learntodecode/emails", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
       });
-  </script>
 
-  <script>
-    function onSubmit(token) {
-      document.getElementById("id").value = document.getElementById("registration-email").value;
-      document.getElementById("registration-form").submit();
+      if (response.status === 200) {
+        alert("You're subscribed! Please check your email and click the verify link.");
+      } else {
+        throw new Error("Something went wrong.");
+      }
     }
-  </script>
+    </script>
+
+  <!-- <script>
+    function onSubmit(event) {
+      e.preventDefault();
+      grecaptcha.ready(function() {
+        grecaptcha.execute("6LfNbFkpAAAAACRDw-PNuGINY7sgAFJAhOM5CWmg", {action: "submit"}).then(function(token) {
+            // Add your logic to submit to your backend server here.
+            document.getElementById("g-recaptcha-token").value = token;
+            document.getElementById("id").value = document.getElementById("registration-email").value;
+            document.getElementById("registration-form").submit();
+        });
+      });
+    }
+  </script> -->
 
   <!-- <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
   <script type="module">

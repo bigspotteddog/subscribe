@@ -269,34 +269,34 @@ var RegistrationForms = (function () {
       }
 
       function addRegistrationButtonEvents(element) {
-        if (!element) {
-          return exported;
+        document.getElementById(settings.registrationFormId).onsubmit = function(ev) {
+          submitForm(ev);
+        }
+        return exported;
+      };
+
+      function submitForm(ev) {
+        ev.preventDefault();
+        debugger;
+        const data = {
+          name: document.getElementById(settings.registrationNameId).value,
+          email: document.getElementById(settings.registrationEmailId).value
         }
 
-        element.addEventListener("click", function (ev) {
-          ev.preventDefault();
-          const data = {
-            name: document.getElementById(settings.registrationNameId).value,
-            email: document.getElementById(settings.registrationEmailId).value
-          }
+        if (data.name.trim().length === 0) {
+          showMessage("Validation error!", "Name is required.", function () {
+            document.getElementById(settings.registrationNameId).focus();
+          });
+          return;
+        }
 
-          if (data.name.trim().length === 0) {
-            showMessage("Validation error!", "Name is required.", function () {
-              document.getElementById(settings.registrationNameId).focus();
-            });
-            return;
-          }
-
-          if (data.email.trim().length === 0) {
-            showMessage("Validation error!", "Email is required.", function () {
-              document.getElementById(settings.registrationEmailId).focus();
-            });
-            return;
-          }
-
-          postData(Object.fromEntries(new FormData(document.getElementById("registration-form")).entries()));
-        });
-        return exported;
+        if (data.email.trim().length === 0) {
+          showMessage("Validation error!", "Email is required.", function () {
+            document.getElementById(settings.registrationEmailId).focus();
+          });
+          return;
+        }
+        postData(Object.fromEntries(new FormData(document.getElementById("registration-form")).entries()));
       }
 
       function addRegisteredAsEvents(element) {
@@ -408,7 +408,8 @@ var RegistrationForms = (function () {
 
       const exported = {
         settings: settings,
-        load: load
+        load: load,
+        submitForm, submitForm
       }
 
       return exported;
