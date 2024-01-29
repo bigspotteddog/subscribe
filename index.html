@@ -190,6 +190,11 @@
             // Get a record from the server where the token is validated.
             "https://api.everybodyelses.com/v1/accounts/learntodecode/emails",
             {
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
               method: "GET",
               headers: {
                 Authorization: "Bearer " + token,
