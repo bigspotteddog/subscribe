@@ -41,6 +41,9 @@
     <h1>Hello, world!</h1>
     <button type="button" class="btn btn-primary" id="login">Login</button>
     <button type="button" class="btn btn-danger" id="logout">Logout</button>
+    <button type="button" class="btn btn-secondary" id="sign-up">
+      Sign Up
+    </button>
     <button type="button" class="btn btn-secondary" id="callApi">
       Emails
     </button>
@@ -151,6 +154,16 @@
       }
     };
 
+    const signUp = async () => {
+      await auth0Client.loginWithRedirect({
+        authorizationParams: {
+          // I am using ngrok locally so auth0 can use this callback.
+          redirect_uri: "https://subscribe.nobodyelses.com",
+          screen_hint: "signup"
+        },
+      });
+    };
+
     const profile = async () => {
       const isAuthenticated = await auth0Client.isAuthenticated();
       const userProfile = await auth0Client.getUser();
@@ -164,6 +177,11 @@
         // The audience is set so this api claim will be in the token.
         audience: "https://api.everybodyelses.com",
       },
+    });
+
+    const signUpButton = document.getElementById("sign-up");
+    loginButton.addEventListener("click", async (e) => {
+      await signUp();
     });
 
     const loginButton = document.getElementById("login");
