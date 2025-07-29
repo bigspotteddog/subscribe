@@ -144,37 +144,37 @@
       let config = {};
       let auth0Client;
 
-      const createAuth0Client = async () => {
-        return await auth0.createAuth0Client({
+      const createAuth0Client = () => {
+        return auth0.createAuth0Client({
           domain: config.auth0Domain,
           clientId: config.clientId,
           authorizationParams: config.params
         });
       };
 
-      const getToken = async () => {
-        return await auth0Client.getTokenSilently();
+      const getToken = () => {
+        return auth0Client.getTokenSilently();
       }
 
-      const profile = async () => {
-        const isAuthenticated = await auth0Client.isAuthenticated();
-        const userProfile = await auth0Client.getUser();
+      const profile = () => {
+        const isAuthenticated = auth0Client.isAuthenticated();
+        const userProfile = auth0Client.getUser();
         console.log(userProfile);
         return userProfile;
       };
 
-      const checkLogin = async () => {
+      const checkLogin = () => {
         try {
-          const token = await getToken();
-          await profile();
+          const token = getToken();
+          profile();
           return token;
         } catch (err) {
-          await login();
+          login();
         }
       };
 
       const login = async () => {
-        await auth0Client.loginWithRedirect({
+        auth0Client.loginWithRedirect({
           authorizationParams: {
             redirect_uri: config.redirectUri,
           },
@@ -182,7 +182,7 @@
       }
 
       const signUp = async () => {
-        await auth0Client.loginWithRedirect({
+        auth0Client.loginWithRedirect({
           authorizationParams: {
             redirect_uri: config.redirectUri,
             screen_hint: "signup"
@@ -203,17 +203,17 @@
           (location.search.includes("code=") ||
             location.search.includes("error="))
         ) {
-          await auth0Client.handleRedirectCallback();
+          auth0Client.handleRedirectCallback();
           window.history.replaceState({}, document.title, "/");
-          await profile();
+          profile();
         } else {
           if (config.autoLogin) {
-            await checkLogin();
+            checkLogin();
           }
         }
       }
 
-      const run = async function (config) {
+      const run = function (config) {
         this.config = config;
         this.auth0Client = createAuth0Client();
       }
@@ -227,15 +227,15 @@
       }
     });
 
-    auth0Service().run({
-      auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
-      clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
-      audience: "https://api.everybodyelses.com",
-      redirectUri: "https://subscribe.nobodyelses.com",
-      autoLogin: true
-    });
-
-    await auth0Service.handleRedirect();
+    auth0Service
+      .run({
+        auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
+        clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
+        audience: "https://api.everybodyelses.com",
+        redirectUri: "https://subscribe.nobodyelses.com",
+        autoLogin: true
+      })
+      .handleRedirect();
 
     const signUpButton = document.getElementById("sign-up");
     signUpButton.addEventListener("click", async (e) => {
