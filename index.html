@@ -140,7 +140,7 @@
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
   <script type="module">
 
-    const auth0 = (function(config) {
+    const auth0 = (async function (config) {
       const auth0Client = await (async (domain, clientId, params) => {
         return await auth0.createAuth0Client({
           domain: domain,
