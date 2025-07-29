@@ -139,63 +139,95 @@
 
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
   <script type="module">
+    const AUTH0_DOMAIN = "dev-b4abuxwyzw0h142d.us.auth0.com";
+    const CLIENT_ID = "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL";
+    const AUDIENCE = "https://api.everybodyelses.com";
+    const REDIRECT_URI = "https://subscribe.nobodyelses.com";
+    const AUTO_LOGIN = true;
+
+    const auth0Client = await (async (domain, clientId, params) => {
+      return await auth0.createAuth0Client({
+        domain: domain,
+        clientId: clientId,
+        authorizationParams: params
+      });
+    })(AUTH0_DOMAIN, CLIENT_ID, { audience: AUDIENCE });
+
     const checkLogin = async () => {
       try {
-        const token = await auth0Client.getTokenSilently();
-        await profile();
+        const token = await getToken();
+        const profile = await profile();
         return token;
       } catch (err) {
-        await auth0Client.loginWithRedirect({
-          authorizationParams: {
-            // I am using ngrok locally so auth0 can use this callback.
-            redirect_uri: "https://subscribe.nobodyelses.com",
-          },
-        });
+        if (AUTO_LOGIN) {
+          await login();
+        }
       }
     };
+
+    const getToken = async () => {
+      return await auth0Client.getTokenSilently();
+    }
+
+    const login = async () => {
+      await auth0Client.loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: REDIRECT_URI,
+        },
+      });
+    }
 
     const signUp = async () => {
       await auth0Client.loginWithRedirect({
         authorizationParams: {
-          // I am using ngrok locally so auth0 can use this callback.
-          redirect_uri: "https://subscribe.nobodyelses.com",
+          redirect_uri: REDIRECT_URI,
           screen_hint: "signup"
         },
       });
     };
 
+    const logout = async () => {
+      auth0Client.logout({
+        returnTo: REDIRECT_URI,
+        clientID: CLIENT_ID,
+      });
+    }
+
     const profile = async () => {
       const isAuthenticated = await auth0Client.isAuthenticated();
       const userProfile = await auth0Client.getUser();
-      console.log(userProfile);
+      return userProfile;
     };
 
-    const auth0Client = await auth0.createAuth0Client({
-      domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
-      clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
-      authorizationParams: {
-        // The audience is set so this api claim will be in the token.
-        audience: "https://api.everybodyelses.com",
-      },
-    });
+    (async () => {
+      if (
+        location.search.includes("state=") &&
+        (location.search.includes("code=") ||
+          location.search.includes("error="))
+      ) {
+        await auth0Client.handleRedirectCallback();
+        window.history.replaceState({}, document.title, "/");
+        await profile();
+      } else {
+        if (AUTO_LOGIN) {
+          await checkLogin();
+        }
+      }
+    })();
 
     const signUpButton = document.getElementById("sign-up");
     signUpButton.addEventListener("click", async (e) => {
-      await signUp();
+      signUp();
     });
 
     const loginButton = document.getElementById("login");
     loginButton.addEventListener("click", async (e) => {
-      await checkLogin();
+      checkLogin();
     });
 
     const logoutButton = document.getElementById("logout");
     logoutButton.addEventListener("click", async (e) => {
-      auth0Client.logout({
-        // Come back here after logout.
-        returnTo: "https://subscribe.nobodyelses.com",
-        clientID: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
-      });
+      logout();
     });
 
     document.getElementById("callApi").addEventListener("click", async () => {
@@ -226,19 +258,6 @@
         console.log(err);
       }
     });
-
-    if (
-      location.search.includes("state=") &&
-      (location.search.includes("code=") ||
-        location.search.includes("error="))
-    ) {
-      await auth0Client.handleRedirectCallback();
-      window.history.replaceState({}, document.title, "/");
-      await profile();
-    } else {
-      // Auto login
-      await checkLogin();
-    }
   </script>
 </body>
 </html>
