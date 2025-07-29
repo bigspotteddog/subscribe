@@ -160,6 +160,7 @@
     const profile = async () => {
       const isAuthenticated = await auth0Client.isAuthenticated();
       const userProfile = await auth0Client.getUser();
+      console.log(userProfile);
       return userProfile;
     };
 
