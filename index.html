@@ -169,9 +169,7 @@
         const profile = await profile();
         return token;
       } catch (err) {
-        if (AUTO_LOGIN) {
-          await login();
-        }
+        await login();
       }
     };
 
