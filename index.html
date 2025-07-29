@@ -163,23 +163,19 @@
         return userProfile;
       };
 
-      const checkLogin = () => {
+      const login = () => {
         try {
           const token = getToken();
           profile();
           return token;
         } catch (err) {
-          login();
+          auth0Client.loginWithRedirect({
+            authorizationParams: {
+              redirect_uri: config.redirectUri,
+            },
+          });
         }
       };
-
-      const login = async () => {
-        auth0Client.loginWithRedirect({
-          authorizationParams: {
-            redirect_uri: config.redirectUri,
-          },
-        });
-      }
 
       const signUp = async () => {
         auth0Client.loginWithRedirect({
@@ -227,34 +223,36 @@
       }
     });
 
-    auth0Service
-      .run({
-        auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
-        clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
-        audience: "https://api.everybodyelses.com",
-        redirectUri: "https://subscribe.nobodyelses.com",
-        autoLogin: true
-      })
-      .handleRedirect();
+    const a0 = auth0Service();
+
+    a0.run({
+      auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
+      clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
+      audience: "https://api.everybodyelses.com",
+      redirectUri: "https://subscribe.nobodyelses.com",
+      autoLogin: true
+    });
+
+    a0.handleRedirect();
 
     const signUpButton = document.getElementById("sign-up");
     signUpButton.addEventListener("click", async (e) => {
-      signUp();
+      a0.signUp();
     });
 
     const loginButton = document.getElementById("login");
     loginButton.addEventListener("click", async (e) => {
-      checkLogin();
+      a0.login();
     });
 
     const logoutButton = document.getElementById("logout");
     logoutButton.addEventListener("click", async (e) => {
-      logout();
+      a0.logout();
     });
 
     document.getElementById("callApi").addEventListener("click", async () => {
       try {
-        const token = await checkLogin();
+        const token = a0.login();
         if (token) {
           console.log("Bearer " + token);
           // Call some api with the token
