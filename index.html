@@ -126,7 +126,7 @@
   <script src="auth0-service.min.js"></script>
   <script>
     auth0Service.handleRedirect();
-    const profile = auth0Service.checkLogin();
+    const profile = auth0Service.profile();
     console.log(profile);
 
     const signUpButton = document.getElementById("sign-up");
