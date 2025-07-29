@@ -233,7 +233,7 @@
       autoLogin: true
     });
 
-    await auth0.handleRedirect();
+    await auth0Service.handleRedirect();
 
     const signUpButton = document.getElementById("sign-up");
     signUpButton.addEventListener("click", async (e) => {
