@@ -134,7 +134,9 @@
 
     const loginButton = document.getElementById("login");
     loginButton.addEventListener("click", async (e) => {
-      auth0Service.login();
+      await auth0Service.login();
+      const profile = await auth0Service.checkLogin();
+      console.log(profile);
     });
 
     const logoutButton = document.getElementById("logout");

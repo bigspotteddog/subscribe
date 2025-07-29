@@ -58,7 +58,6 @@ const auth0Service = (function () {
       const isAuthenticated = await auth0Client.isAuthenticated();
       if (isAuthenticated) {
         const userProfile = await auth0Client.getUser();
-        console.log(userProfile);
         return userProfile;
       }
       return null;
@@ -88,7 +87,6 @@ const auth0Service = (function () {
       const isAuthenticated = await auth0Client.isAuthenticated();
       if (isAuthenticated) {
         const token = await getToken();
-        await profile();
         return token;
       } else {
         throw new Error('Not authenticated');
@@ -149,7 +147,6 @@ const auth0Service = (function () {
       ) {
         await auth0Client.handleRedirectCallback();
         window.history.replaceState({}, document.title, "/");
-        await profile();
       } else {
         if (config.autoLogin) {
           await checkLogin();
