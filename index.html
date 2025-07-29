@@ -167,7 +167,7 @@
 
     document.getElementById("callApi").addEventListener("click", async () => {
       try {
-        const token = await a0.login();
+        const token = await auth0Service.login();
         if (token) {
           console.log("Bearer " + token);
           // Call some api with the token
