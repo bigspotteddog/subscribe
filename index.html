@@ -199,7 +199,8 @@
       return userProfile;
     };
 
-    (async () => {
+    const handleRedirect = async () => {
+      debugger
       if (
         location.search.includes("state=") &&
         (location.search.includes("code=") ||
@@ -213,7 +214,9 @@
           await checkLogin();
         }
       }
-    })();
+    }
+
+    await handleRedirect();
 
     const signUpButton = document.getElementById("sign-up");
     signUpButton.addEventListener("click", async (e) => {
