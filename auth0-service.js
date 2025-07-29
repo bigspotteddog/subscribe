@@ -200,5 +200,15 @@ const auth0Service = (function () {
   };
 })();
 
+(async () => {
+    await auth0Service.run({
+        auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
+        clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
+        params: { audience: "https://api.everybodyelses.com" },
+        redirectUri: "https://subscribe.nobodyelses.com",
+        autoLogin: true
+    });
+})();
+
 // Export for use in other modules (if using ES6 modules)
 // export default auth0Service;
