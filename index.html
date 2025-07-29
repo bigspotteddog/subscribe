@@ -143,7 +143,7 @@
     const CLIENT_ID = "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL";
     const AUDIENCE = "https://api.everybodyelses.com";
     const REDIRECT_URI = "https://subscribe.nobodyelses.com";
-    const AUTO_LOGIN = true;
+    const AUTO_LOGIN = false;
 
     const auth0Client = await (async (domain, clientId, params) => {
       return await auth0.createAuth0Client({
