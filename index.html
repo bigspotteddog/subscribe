@@ -166,7 +166,7 @@
     const checkLogin = async () => {
       try {
         const token = await getToken();
-        const profile = await profile();
+        await profile();
         return token;
       } catch (err) {
         await login();
