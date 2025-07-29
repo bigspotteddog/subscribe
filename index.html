@@ -153,6 +153,16 @@
       });
     })(AUTH0_DOMAIN, CLIENT_ID, { audience: AUDIENCE });
 
+    const getToken = async () => {
+      return await auth0Client.getTokenSilently();
+    }
+
+    const profile = async () => {
+      const isAuthenticated = await auth0Client.isAuthenticated();
+      const userProfile = await auth0Client.getUser();
+      return userProfile;
+    };
+
     const checkLogin = async () => {
       try {
         const token = await getToken();
@@ -164,10 +174,6 @@
         }
       }
     };
-
-    const getToken = async () => {
-      return await auth0Client.getTokenSilently();
-    }
 
     const login = async () => {
       await auth0Client.loginWithRedirect({
@@ -192,12 +198,6 @@
         clientID: CLIENT_ID,
       });
     }
-
-    const profile = async () => {
-      const isAuthenticated = await auth0Client.isAuthenticated();
-      const userProfile = await auth0Client.getUser();
-      return userProfile;
-    };
 
     const handleRedirect = async () => {
       debugger
