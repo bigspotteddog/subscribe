@@ -140,14 +140,17 @@
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
   <script type="module">
 
-    const auth0 = (async function (config) {
-      const auth0Client = await (async (domain, clientId, params) => {
+    var auth0Service = (async function () {
+      let config = {};
+      let auth0Client;
+
+      const createAuth0Client = async () => {
         return await auth0.createAuth0Client({
-          domain: domain,
-          clientId: clientId,
-          authorizationParams: params
+          domain: config.auth0Domain,
+          clientId: config.clientId,
+          authorizationParams: config.params
         });
-      })(config.auth0Domain, config.clientId, { audience: config.audience });
+      };
 
       const getToken = async () => {
         return await auth0Client.getTokenSilently();
@@ -209,7 +212,20 @@
           }
         }
       }
-    })({
+
+      const run = function (config) {
+        this.config = config;
+        this.auth0Client = createAuth0Client();
+      }
+
+      return {
+        run: run,
+        login: login,
+        logout: logout
+      }
+    });
+
+    auth0Service().run({
       auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
       clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
       audience: "https://api.everybodyelses.com",
