@@ -138,121 +138,36 @@
   </script> -->
 
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <script src="auth0-service.js"></script>
   <script type="module">
 
-    var auth0Service = (function () {
-      let config = {};
-      let auth0Client;
-
-      const createAuth0Client = () => {
-        return auth0.createAuth0Client({
-          domain: config.auth0Domain,
-          clientId: config.clientId,
-          authorizationParams: config.params
-        });
-      };
-
-      const getToken = () => {
-        return auth0Client.getTokenSilently();
-      }
-
-      const profile = () => {
-        const isAuthenticated = auth0Client.isAuthenticated();
-        const userProfile = auth0Client.getUser();
-        console.log(userProfile);
-        return userProfile;
-      };
-
-      const login = () => {
-        try {
-          const token = getToken();
-          profile();
-          return token;
-        } catch (err) {
-          auth0Client.loginWithRedirect({
-            authorizationParams: {
-              redirect_uri: config.redirectUri,
-            },
-          });
-        }
-      };
-
-      const signUp = async () => {
-        auth0Client.loginWithRedirect({
-          authorizationParams: {
-            redirect_uri: config.redirectUri,
-            screen_hint: "signup"
-          },
-        });
-      };
-
-      const logout = async () => {
-        auth0Client.logout({
-          returnTo: config.redirectUri,
-          clientID: config.clientId
-        });
-      }
-
-      const handleRedirect = async () => {
-        if (
-          location.search.includes("state=") &&
-          (location.search.includes("code=") ||
-            location.search.includes("error="))
-        ) {
-          auth0Client.handleRedirectCallback();
-          window.history.replaceState({}, document.title, "/");
-          profile();
-        } else {
-          if (config.autoLogin) {
-            checkLogin();
-          }
-        }
-      }
-
-      const run = function (config) {
-        this.config = config;
-        this.auth0Client = createAuth0Client();
-      }
-
-      return {
-        run: run,
-        signUp: signUp,
-        login: login,
-        logout: logout,
-        handleRedirect: handleRedirect
-      }
-    });
-
-    const a0 = auth0Service();
-
-    a0.run({
+    await auth0Service.run({
       auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
       clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
       audience: "https://api.everybodyelses.com",
       redirectUri: "https://subscribe.nobodyelses.com",
       autoLogin: true
     });
-
-    a0.handleRedirect();
+    auth0Service.handleRedirect();
 
     const signUpButton = document.getElementById("sign-up");
     signUpButton.addEventListener("click", async (e) => {
-      a0.signUp();
+      auth0Service.signUp();
     });
 
     const loginButton = document.getElementById("login");
     loginButton.addEventListener("click", async (e) => {
-      a0.login();
+      auth0Service.login();
     });
 
     const logoutButton = document.getElementById("logout");
     logoutButton.addEventListener("click", async (e) => {
-      a0.logout();
+      auth0Service.logout();
     });
 
     document.getElementById("callApi").addEventListener("click", async () => {
       try {
-        const token = a0.login();
+        const token = await a0.login();
         if (token) {
           console.log("Bearer " + token);
           // Call some api with the token
