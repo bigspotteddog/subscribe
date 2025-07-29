@@ -140,7 +140,7 @@
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
   <script type="module">
 
-    var auth0Service = (async function () {
+    var auth0Service = (function () {
       let config = {};
       let auth0Client;
 
@@ -213,7 +213,7 @@
         }
       }
 
-      const run = function (config) {
+      const run = async function (config) {
         this.config = config;
         this.auth0Client = createAuth0Client();
       }
@@ -225,7 +225,7 @@
       }
     });
 
-    await auth0Service().run({
+    auth0Service().run({
       auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
       clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
       audience: "https://api.everybodyelses.com",
