@@ -138,6 +138,8 @@
       const userProfile = await auth0Service.profile();
       if (userProfile) {
         console.log("Logged in user profile:", userProfile);
+      } else {
+        await auth0Service.login();
       }
 
       const signUpButton = document.getElementById("sign-up");
