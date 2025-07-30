@@ -127,9 +127,8 @@
     (async () => {
       await auth0Service.handleRedirect();
 
-      const token = await auth0Service.getToken();
-      if (token) {
-        const userProfile = await auth0Service.profile();
+      const userProfile = await auth0Service.profile();
+      if (userProfile) {
         console.log("Logged in user profile:", userProfile);
       }
 
