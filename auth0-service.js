@@ -137,7 +137,7 @@ const auth0Service = (function () {
     }
   };
   
-  const handleRedirect = async () => {
+  const handleRedirect = async (callback) => {
     try {
       await ensureInitialized();
       if (
