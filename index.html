@@ -127,11 +127,10 @@
     (async () => {
       await auth0Service.handleRedirect();
 
-      const userProfile = await auth0Service.profile();
-      if (userProfile) {
+      const token = await auth0Service.getToken();
+      if (token) {
+        const userProfile = await auth0Service.profile();
         console.log("Logged in user profile:", userProfile);
-      } else {
-        await auth0Service.login();
       }
 
       const signUpButton = document.getElementById("sign-up");
