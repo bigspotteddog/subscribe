@@ -125,14 +125,6 @@
   <script src="auth0-service.js"></script>
   <script>
     (async () => {
-      await auth0Service.run({
-        auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
-        clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
-        params: { audience: "https://api.everybodyelses.com" },
-        redirectUri: "https://subscribe.nobodyelses.com",
-        autoLogin: true
-      });
-
       await auth0Service.handleRedirect();
 
       const userProfile = await auth0Service.profile();
