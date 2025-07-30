@@ -129,7 +129,7 @@
       await auth0Service.handleRedirect();
       const profile = await auth0Service.profiile();
       console.log(profile);
-    })
+    })();
 
     const signUpButton = document.getElementById("sign-up");
     signUpButton.addEventListener("click", async (e) => {
