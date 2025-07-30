@@ -139,14 +139,12 @@ const auth0Service = (function () {
   
   const handleRedirect = async (callback) => {
     try {
-      await waitForInitialization(); // Use this instead of ensureInitialized
+      await ensureInitialized();
       if (
         location.search.includes("state=") &&
         (location.search.includes("code=") ||
           location.search.includes("error="))
       ) {
-        // A small delay can sometimes help with race conditions.
-        await new Promise(resolve => setTimeout(resolve, 250)); 
         await auth0Client.handleRedirectCallback();
         window.history.replaceState({}, document.title, "/");
       } else {
