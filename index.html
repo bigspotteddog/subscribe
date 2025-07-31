@@ -34,8 +34,11 @@
           <a class="nav-link" href="#">Pricing</a>
         </div>
       </div>
-      <div id="profile-container" class="d-none">
-        <img id="profile-picture" src="" class="rounded-circle" style="width: 40px; height: 40px;">
+      <div id="profile-container" class="dropdown d-none">
+        <img id="profile-picture" src="" class="rounded-circle dropdown-toggle" style="width: 40px; height: 40px;" data-bs-toggle="dropdown" aria-expanded="false">
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" id="logout-button">Logout</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -137,6 +140,10 @@
         console.log("Logged in user profile:", userProfile);
         document.getElementById("profile-picture").src = userProfile.picture;
         document.getElementById("profile-container").classList.remove("d-none");
+        document.getElementById("logout-button").addEventListener("click", (e) => {
+          e.preventDefault();
+          auth0Service.logout();
+        });
       }
 
       const signUpButton = document.getElementById("sign-up");
