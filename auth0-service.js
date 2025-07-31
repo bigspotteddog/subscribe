@@ -149,7 +149,7 @@ const auth0Service = (function () {
         window.history.replaceState({}, document.title, "/");
       } else {
         if (config.autoLogin) {
-          await checkLogin();
+          await login();
         }
       }
     } catch (error) {
