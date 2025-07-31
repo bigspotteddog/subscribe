@@ -34,8 +34,10 @@
           <a class="nav-link" href="#">Pricing</a>
         </div>
         <div id="login-container" class="d-none ms-auto">
-          <button type="button" class="btn btn-secondary me-2" id="sign-up-button">Sign Up</button>
-          <button type="button" class="btn btn-primary" id="login-button">Login</button>
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#" id="sign-up-button">Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" id="login-button">Login</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -141,9 +143,11 @@
       } else {
         document.getElementById("login-container").classList.remove("d-none");
         document.getElementById("sign-up-button").addEventListener("click", (e) => {
+          e.preventDefault();
           auth0Service.signUp();
         });
         document.getElementById("login-button").addEventListener("click", (e) => {
+          e.preventDefault();
           auth0Service.login();
         });
       }
