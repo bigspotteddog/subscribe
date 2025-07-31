@@ -42,16 +42,15 @@
           <li><a class="dropdown-item" href="#" id="logout-button">Logout</a></li>
         </ul>
       </div>
+      <div id="login-container" class="d-none">
+        <button type="button" class="btn btn-secondary" id="sign-up-button">Sign Up</button>
+        <button type="button" class="btn btn-primary" id="login-button">Login</button>
+      </div>
     </div>
   </nav>
 
   <div class="container">
     <h1>Hello, world!</h1>
-    <button type="button" class="btn btn-primary" id="login">Login</button>
-    <button type="button" class="btn btn-danger" id="logout">Logout</button>
-    <button type="button" class="btn btn-secondary" id="sign-up">
-      Sign Up
-    </button>
     <button type="button" class="btn btn-secondary" id="callApi">
       Emails
     </button>
@@ -147,22 +146,15 @@
           e.preventDefault();
           auth0Service.logout();
         });
+      } else {
+        document.getElementById("login-container").classList.remove("d-none");
+        document.getElementById("sign-up-button").addEventListener("click", (e) => {
+          auth0Service.signUp();
+        });
+        document.getElementById("login-button").addEventListener("click", (e) => {
+          auth0Service.login();
+        });
       }
-
-      const signUpButton = document.getElementById("sign-up");
-      signUpButton.addEventListener("click", async (e) => {
-        auth0Service.signUp();
-      });
-
-      const loginButton = document.getElementById("login");
-      loginButton.addEventListener("click", async (e) => {
-        await auth0Service.login();
-      });
-
-      const logoutButton = document.getElementById("logout");
-      logoutButton.addEventListener("click", async (e) => {
-        auth0Service.logout();
-      });
 
       document.getElementById("callApi").addEventListener("click", async () => {
         try {
