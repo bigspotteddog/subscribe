@@ -213,7 +213,7 @@ const auth0Service = (function () {
     clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
     params: { audience: "https://api.everybodyelses.com" },
     redirectUri: "https://subscribe.nobodyelses.com",
-    autoLogin: true
+    autoLogin: false
   });
 })();
 
