@@ -145,27 +145,20 @@
     (async () => {
       await auth0Service.handleRedirect();
 
-      const userProfile = await auth0Service.profile();
-      if (userProfile) {
-        console.log("Logged in user profile:", userProfile);
-        document.getElementById("profile-picture").src = userProfile.picture;
-        document.getElementById("profile-nickname").textContent = userProfile.nickname;
-        document.getElementById("profile-container").classList.remove("d-none");
-        document.getElementById("logout-button").addEventListener("click", (e) => {
-          e.preventDefault();
-          auth0Service.logout();
-        });
-      } else {
-        document.getElementById("login-container").classList.remove("d-none");
-        document.getElementById("sign-up-button").addEventListener("click", (e) => {
-          e.preventDefault();
-          auth0Service.signUp();
-        });
-        document.getElementById("login-button").addEventListener("click", (e) => {
-          e.preventDefault();
-          auth0Service.login();
-        });
-      }
+      document.getElementById("sign-up-button").addEventListener("click", (e) => {
+        e.preventDefault();
+        auth0Service.signUp();
+      });
+
+      document.getElementById("login-button").addEventListener("click", (e) => {
+        e.preventDefault();
+        auth0Service.login();
+      });
+
+      document.getElementById("logout-button").addEventListener("click", (e) => {
+        e.preventDefault();
+        auth0Service.logout();
+      });
 
       document.getElementById("callApi").addEventListener("click", async () => {
         try {

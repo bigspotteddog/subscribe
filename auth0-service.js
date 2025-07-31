@@ -147,6 +147,16 @@ const auth0Service = (function () {
       ) {
         await auth0Client.handleRedirectCallback();
         window.history.replaceState({}, document.title, "/");
+
+        const userProfile = await auth0Service.profile();
+        if (userProfile) {
+            console.log("Logged in user profile:", userProfile);
+            document.getElementById("profile-picture").src = userProfile.picture;
+            document.getElementById("profile-nickname").textContent = userProfile.nickname;
+            document.getElementById("profile-container").classList.remove("d-none");
+        } else {
+            document.getElementById("login-container").classList.remove("d-none");
+        }
       } else {
         if (config.autoLogin) {
           await checkLogin();
