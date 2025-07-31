@@ -67,20 +67,6 @@ const auth0Service = (function () {
     }
   };
 
-  const checkLogin = async () => {
-    try {
-      await ensureInitialized();
-      const isAuthenticated = await auth0Client.isAuthenticated();
-      if (isAuthenticated) {
-        return await profile();
-      }
-      return null;
-    } catch (error) {
-      console.error('Error checking login:', error);
-      throw error;
-    }
-  };
-
   const login = async () => {
     try {
       await ensureInitialized();
