@@ -3,7 +3,7 @@ const auth0Service = (function () {
   let auth0Client;
   let auth0Loaded = false;
   let initializationPromise = null;
-  
+
   // Dynamically load Auth0 SDK if not already loaded
   const loadAuth0SDK = () => {
     return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ const auth0Service = (function () {
         resolve();
         return;
       }
-      
+
       const script = document.createElement('script');
       script.src = 'https://cdn.auth0.com/js/auth0-spa-js/2.1/auth0-spa-js.production.js';
       script.onload = () => {
@@ -22,7 +22,7 @@ const auth0Service = (function () {
       document.head.appendChild(script);
     });
   };
-  
+
   const createAuth0Client = async () => {
     await loadAuth0SDK();
     return await auth0.createAuth0Client({
@@ -31,7 +31,7 @@ const auth0Service = (function () {
       authorizationParams: config.params
     });
   };
-  
+
   // Ensure client is initialized before any operations
   const ensureInitialized = async () => {
     if (initializationPromise) {
@@ -41,7 +41,7 @@ const auth0Service = (function () {
       throw new Error('Auth0 service not initialized. Call run() first.');
     }
   };
-  
+
   const getToken = async () => {
     try {
       await ensureInitialized();
@@ -51,7 +51,7 @@ const auth0Service = (function () {
       throw error;
     }
   };
-  
+
   const profile = async () => {
     try {
       await ensureInitialized();
@@ -66,7 +66,7 @@ const auth0Service = (function () {
       throw error;
     }
   };
-  
+
   const checkLogin = async () => {
     try {
       await ensureInitialized();
@@ -80,7 +80,7 @@ const auth0Service = (function () {
       throw error;
     }
   };
-  
+
   const login = async () => {
     try {
       await ensureInitialized();
@@ -105,7 +105,7 @@ const auth0Service = (function () {
       }
     }
   };
-  
+
   const signUp = async () => {
     try {
       await ensureInitialized();
@@ -121,7 +121,7 @@ const auth0Service = (function () {
       throw error;
     }
   };
-  
+
   const logout = async () => {
     try {
       await ensureInitialized();
@@ -136,7 +136,7 @@ const auth0Service = (function () {
       throw error;
     }
   };
-  
+
   const handleRedirect = async (callback) => {
     try {
       await ensureInitialized();
@@ -149,7 +149,7 @@ const auth0Service = (function () {
         window.history.replaceState({}, document.title, "/");
       } else {
         if (config.autoLogin) {
-          await checkLogin();          
+          await checkLogin();
         }
       }
     } catch (error) {
@@ -159,19 +159,19 @@ const auth0Service = (function () {
 
     const userProfile = await auth0Service.profile();
     if (userProfile) {
-        console.log("Logged in user profile:", userProfile);
-        document.getElementById("profile-picture").src = userProfile.picture;
-        document.getElementById("profile-nickname").textContent = userProfile.nickname;
-        document.getElementById("profile-container").classList.remove("d-none");
+      console.log("Logged in user profile:", userProfile);
+      document.getElementById("profile-picture").src = userProfile.picture;
+      document.getElementById("profile-nickname").textContent = userProfile.nickname;
+      document.getElementById("profile-container").classList.remove("d-none");
     } else {
-        document.getElementById("login-container").classList.remove("d-none");
+      document.getElementById("login-container").classList.remove("d-none");
     }
   };
-  
+
   // Make run() return a promise but also provide synchronous usage
   const run = function (configParam) {
     config = configParam;
-    
+
     // Store the initialization promise
     initializationPromise = createAuth0Client().then(client => {
       auth0Client = client;
@@ -180,20 +180,20 @@ const auth0Service = (function () {
       console.error('Failed to initialize Auth0 client:', error);
       throw error;
     });
-    
+
     return initializationPromise;
   };
-  
+
   // Provide a way to check if initialized
   const isInitialized = () => {
     return auth0Client !== undefined;
   };
-  
+
   // Provide a way to wait for initialization
   const waitForInitialization = () => {
     return initializationPromise || Promise.resolve();
   };
-  
+
   return {
     run: run,
     signUp: signUp,
@@ -208,13 +208,13 @@ const auth0Service = (function () {
 })();
 
 (async () => {
-    await auth0Service.run({
-        auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
-        clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
-        params: { audience: "https://api.everybodyelses.com" },
-        redirectUri: "https://subscribe.nobodyelses.com",
-        autoLogin: true
-    });
+  await auth0Service.run({
+    auth0Domain: "dev-b4abuxwyzw0h142d.us.auth0.com",
+    clientId: "iTegX4oYdlmnlaCqs0YQa4xGvK3OiSeL",
+    params: { audience: "https://api.everybodyelses.com" },
+    redirectUri: "https://subscribe.nobodyelses.com",
+    autoLogin: true
+  });
 })();
 
 // Export for use in other modules (if using ES6 modules)
