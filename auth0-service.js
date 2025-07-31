@@ -147,6 +147,10 @@ const auth0Service = (function () {
       ) {
         await auth0Client.handleRedirectCallback();
         window.history.replaceState({}, document.title, "/");
+      } else {
+        if (config.autoLogin) {
+          await checkLogin();          
+        }
 
         const userProfile = await auth0Service.profile();
         if (userProfile) {
@@ -156,10 +160,6 @@ const auth0Service = (function () {
             document.getElementById("profile-container").classList.remove("d-none");
         } else {
             document.getElementById("login-container").classList.remove("d-none");
-        }
-      } else {
-        if (config.autoLogin) {
-          await checkLogin();
         }
       }
     } catch (error) {
